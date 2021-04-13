@@ -271,6 +271,7 @@
                     $totalPages = $maxItems/$maxPage;
                     echo "<script type=\"text/javascript\">
                     $(function() {
+                            hideHeader();
                             var limit = ".$maxPage."; window.pagObj = $('#pagination').twbsPagination({
                                 totalPages : ".$totalPages.",
                                 visiblePages : 10,
@@ -283,7 +284,6 @@
                             }).on('page', function(event, page) {
                                 topFunction();
                                 console.info(page + ' (from event listening)');
-                                topFunction()
                             });
                         });
                 </script>";
@@ -298,6 +298,7 @@
                     $totalPages = $maxItems/$maxPage;
                     echo "<script type=\"text/javascript\">
                     $(function() {
+                            hideHeader();
                             var limit = ".$maxPage."; window.pagObj = $('#pagination').twbsPagination({
                                 totalPages : ".$totalPages.",
                                 visiblePages : 10,
@@ -310,6 +311,7 @@
                                 }
                             }).on('page', function(event, page) {
                                 console.info(page + ' (from event listening)');
+                                    
                                 topFunction();
                             });
                         });

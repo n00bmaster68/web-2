@@ -187,7 +187,7 @@ function AccountOn()
 	for (var i = 0; i < 4; i++)
 		temp += '<div class="col-4"' + 'id="' + product_info[i].id + '">' + '<img src="' + product_info[i].img+ '"><h4>' + product_info[i].name + '</h4><div class="rating"><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span></div><p>' + product_info[i].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '</p>' + '<button class="DetailBtn"' + 'id="' + product_info[i].id + '" onclick="showProductDetail(this.id)">Details</button>' + '</div>';
 	document.getElementById("bestSeller").innerHTML = temp;
-	console.log("best" + temp);
+	// console.log("best" + temp);
 
 	temp = "";
 	for (var i = product_info.length - 1; i >= product_info.length - 4; i--)
@@ -541,7 +541,6 @@ function changeProductType()
 
 function home()
 {
-	menutoggle();
 	document.getElementById("pagination").style.display = "none";
 	document.getElementById("account").style.display = "none";
 	document.getElementById("Endorser").style.display = "block";
@@ -1017,4 +1016,14 @@ function forgotPW()
 	{
 		alert("This name is not existed !!");
 	}
+}
+
+function hideHeader() 
+{
+	console.log("runnnninuiqwefuqweuqwerfvu");
+	document.getElementById("Endorser").style.display = "none";
+	document.getElementById("propagation").style.display = "none";
+	document.getElementById("bs&na").style.display = "none";
+	document.getElementById("home").style.height = "100px";
+	document.getElementById("all_products").style.display = "block";
 }
