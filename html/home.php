@@ -333,7 +333,7 @@
         </section>
         <div class="website-features">
             <div class="container">
-                <div class="row" style="margin-left: 32px;">
+                <div class="row" style="margin-left: 140px;">
                     <div class="col1">
                         <img src="..\image\ft1.png">
                         <div class="feature-text">
