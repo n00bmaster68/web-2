@@ -3,6 +3,7 @@
 	$page = $_GET["page"];
 	$maxPageItem = $_GET["maxPageItem"];
 	$typeID = $_GET["typeID"];
+    echo $typeID;
 	settype ($page, "int");
 	$from = ($page - 1) * $maxPageItem;
 	$query = "SELECT * FROM sanpham WHERE MaLo = ".$typeID."
@@ -10,12 +11,13 @@
 	";
     $query1 ="SELECT tenloai FROM loai"."WHERE MaLo = ".$typeID;
     $tin1 = mysqli_query($conn, $query1);
-    $data1 = array();
-    while($row1 = mysqli_fetch_array($tin1)){
-        $data1[] = $row1;
-    }
+    // $data1 = "";
+    // while($row1 = mysqli_fetch_array($tin1)){
+    //     $data1[] = $row1[];
+    // }
 
 	$tin = mysqli_query($conn, $query);
+    echo $query;
     $data = array();
     while($row = mysqli_fetch_array($tin)){
         $data[] = $row;
@@ -38,5 +40,5 @@
         }
         $i++;
     }
-    echo('<h2 class="title" style="margin-bottom:-90px">'.$data1[0].'/page '.$page.'</h2>'.$products);
+    echo($products);
 ?>

@@ -284,6 +284,7 @@
                                     });
                                 }
                             }).on('page', function(event, page) {
+                                topFunction();
                                 console.info(page + ' (from event listening)');
                             });
                         });
@@ -306,6 +307,7 @@
                                 visiblePages : 10,
                                 onPageClick : function(event, page) {
                                     var pageEvent = page;
+                                    
                                     $.get(\"../thuan/phantrangsp-type.php\", { maxPageItem:limit, page:pageEvent, typeID: ".$MaLoai."}, function(data){
                                         $(\"#all_products\").html(data);
                                     });
