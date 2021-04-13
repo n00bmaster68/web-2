@@ -9,4 +9,10 @@ return [
         }
         return $data;
     },
+    'findTypeNameById' => function($conn,$MaLoai) {
+        $query ="SELECT TenLoai FROM loai"." WHERE MaLo = ".$MaLoai;
+        $result = mysqli_query($conn,$query);
+        $result = $result->fetch_array();
+        return strval($result[0]);
+    },
 ];

@@ -4,14 +4,8 @@
 	$maxPageItem = $_GET["maxPageItem"];
 	settype ($page, "int");
 	$from = ($page - 1) * $maxPageItem;
-	$query = "SELECT * FROM sanpham ORDER BY GiaBan ASC
-		LIMIT $from, $maxPageItem
-	";
-	$tin = mysqli_query($conn, $query);
-    $data = array();
-    while($row = mysqli_fetch_array($tin)){
-        $data[] = $row;
-    }
+	['findAllProducts' => $array] = require '../Model/product.php';
+	$data = $array($conn,$from,$maxPageItem);
     require_once('../utils/close_db.php');
     $products = "";
     $temp = "";
