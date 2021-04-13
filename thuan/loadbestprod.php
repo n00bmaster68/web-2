@@ -13,7 +13,7 @@
         $temp = $temp.'<div class="col4" id="'.$dataNumb[$i]['MaSP'].'">'.'<img src="'.$dataNumb[$i]['Hinh'].'"><h4>'.$dataNumb[$i]['Ten'].'</h4><p>'.$price1.' VND'.'</p><button class="DetailBtn" id="'.$dataNumb[$i]['MaSP'].'"' . ' onclick="showProductDetail(this.id)">Details</button></div>';
         if ($i + 1 != 0 && ($i + 1)%4 == 0 || $i == count($dataNumb)-1)
         {
-            $products = $products.'<div class="row2" style="margin-top: 10%;margin-bottom: -12%">'.$temp.'</div>';
+            $products = $products.'<div class="row2" margin-top: 0%; margin-bottom: 2%;">'.$temp.'</div>';
             $temp = '';
         }
         if ($i == 3) {
