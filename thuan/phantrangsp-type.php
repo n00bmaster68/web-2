@@ -3,7 +3,6 @@
 	$page = $_GET["page"];
 	$maxPageItem = $_GET["maxPageItem"];
 	$typeID = $_GET["typeID"];
-    echo $typeID;
 	settype ($page, "int");
 	$from = ($page - 1) * $maxPageItem;
 	
