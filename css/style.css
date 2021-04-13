@@ -342,6 +342,7 @@ a
 	{
 		display: block;
 		cursor: pointer;
+		margin-left: -20px;
 	}
 	.col2
  
@@ -352,6 +353,16 @@ a
  
 	{
 		max-width: 70%;
+	}
+
+	h2
+	{
+		margin-bottom: 50px;
+	}
+
+	.row2
+	{
+		margin-top: 22% !important;
 	}
 }
 /* responsive for header */
@@ -1056,4 +1067,3 @@ p.top
     background-color: #fff;
     border: 1px solid #dee2e6;
 }
- 

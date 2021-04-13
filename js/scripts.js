@@ -271,7 +271,7 @@ function Login()
 
 function open_login_reg_form()
 {
-	menutoggle();
+	// menutoggle();
 	document.getElementById("Endorser").style.display = "none";
 	document.getElementById("account").style.display = "block";
 	document.getElementById("propagation").style.display = "none";
@@ -541,7 +541,6 @@ function changeProductType()
 
 function home()
 {
-	menutoggle();
 	document.getElementById("pagination").style.display = "none";
 	document.getElementById("account").style.display = "none";
 	document.getElementById("Endorser").style.display = "block";
@@ -551,67 +550,6 @@ function home()
 	document.getElementById("all_products").style.display = "none";
 	AccountOn();
 }
-
-// function changeP(a, num, page_arr)
-// {
-// 	document.getElementById("all_products").innerHTML = page_arr[parseInt(a)-1];
-// 	document.getElementById(a).style.background = "teal";
-// 	for (var i = 1; i <= num; i++)
-// 		if (i != parseInt(a))
-// 		{
-// 			document.getElementById(i.toString()).style.background = "#FF8C00";
-// 		}
-// 	window.scrollBy(0, -700);
-// }
-
-// function changePage(a){ changeP(a, num, page);}
-// function changePantPage(a){ changeP(a, num_pant, pant_page);}
-// function changeShirtPage(a){ changeP(a, num_shirt, shirt_page);}
-
-// function getNum(arr)
-// {
-// 	var num = 0;
-// 	if (arr.length%12 != 0)
-// 		num = float2int(arr.length/12) + 1;
-// 	else 
-// 		num = arr.length/12;
-// 	return num;
-// }
-
-// function createPage(num, arr, page_arr, type)
-// {
-// 	var product_info = JSON.parse(localStorage.getItem('product_info'));
-// 	var flag = 1;
-// 	var c1 = 0;
-// 	var temp = '';
-// 	for (var i = 0; i < num; i++)
-// 	{
-// 		var products = "";
-// 		for (var j = i*12; j < i*12 + 12; j++)
-// 		{
-// <<<<<<< HEAD
-// 			temp += '<div class="col-4"' + 'id="' + product_info[arr[j]].id + '">' + '<img src="' + product_info[arr[j]].img+ '"><h4>' + product_info[arr[j]].name + '</h4><div class="rating"><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span></div><p>' + product_info[arr[j]].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '</p>' + '<button class="DetailBtn"' + 'id="' + product_info[arr[j]].id + '" onclick="showProductDetail(this.id)">Details</button>' + '</div>';
-// =======
-// 			temp += '<div class="col4"' + 'id="' + product_info[arr[j]].id + '">' + '<img src="' + product_info[arr[j]].img+ '"><h4>' + product_info[arr[j]].name + '</h4><div class="rating"><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span></div><p>' + product_info[arr[j]].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '</p>' + '<button class="DetailBtn"' + 'id="' + product_info[arr[j]].id + '" onclick="showProductDetail(this.id)">Details</button>' + '</div>';
-// >>>>>>> 065b4a2... tai thang Thuan
-// 			c1 += 1;
-// 			if (c1 == 4 || j == arr.length - 1)
-// 			{
-// 				temp = '<div class="row2">' + temp + '</div>';
-// 				products += temp;
-// 				temp = "";
-// 				c1 = 0;
-// 				if (j == arr.length - 1)
-// 					flag = 0;
-// 			}
-// 			if (flag == 0)
-// 				break;
-// 		}
-// 		page_arr.push('<h2 class="title">' + type + '/page ' + parseInt(i + 1) + '</h2>' + products);
-// 		if (flag == 0)
-// 			break;
-// 	}
-// }
 
 function showPagination(){
 	sessionStorage.setItem("call", "true");
@@ -628,6 +566,7 @@ function showShirts(){
 	showPagination();
 }
 function showProducts(){
+	console.log("showProducts");
 	showPagination();
 }
 
@@ -1077,4 +1016,14 @@ function forgotPW()
 	{
 		alert("This name is not existed !!");
 	}
+}
+
+function hideHeader() 
+{
+	console.log("runnnninuiqwefuqweuqwerfvu");
+	document.getElementById("Endorser").style.display = "none";
+	document.getElementById("propagation").style.display = "none";
+	document.getElementById("bs&na").style.display = "none";
+	document.getElementById("home").style.height = "100px";
+	document.getElementById("all_products").style.display = "block";
 }
