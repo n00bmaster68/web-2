@@ -72,7 +72,7 @@
                         </a>
                     </div>
 
-                    <form action="" method="POST" id="searchFormGroup">
+                    <form action="" method="GET" id="searchFormGroup">
                         <div class="searchForm" id="search">
                             <input type="text" class="input" placeholder="Search" onkeyup="funcClickBtn()" id="input"
                                 name="txtSearch" maxlength="50" autofocus="true">
@@ -97,39 +97,6 @@
                                 </select>
                             </div>
                             <div id="search_result" class="small-container">
-                                <?php
-									if (isset($_POST['txtSearch'])) {
-										$inputSearch = $_POST['txtSearch'];
-										$priceSearch = $_POST['priceValue'];
-										$typeSearch = $_POST['typeId'];
-										$typePrice = "";
-										if ($priceSearch == '1') {
-											$typePrice = ">=";
-										}else if ($priceSearch == '2'){
-											$typePrice = "<=";
-										}
-										['SearchProducts' => $array] = require '../Model/product.php';
-										$data = $array($conn,$inputSearch,$typePrice,1000000,$typeSearch);
-										$products = "";
-										$temp = "";
-										
-										for($i=0;$i<count($data);$i++) {
-											$price = intval($data[$i]['GiaBan']);
-											$price1 =  number_format($price, 0, '', '.');
-
-											$temp = $temp.'<div class="col4" id="'.$data[$i]['MaSP'].'">'.'<img src="'.$data[$i]['Hinh'].'"><h4>'.$data[$i]['Ten'].'</h4><p>'.$price1.' VND'.'</p><button class="DetailBtn" id="'.$data[$i]['MaSP'].'"' . ' onclick="showProductDetail(this.id)">Details</button></div>';
-											if ($i + 1 != 0 && ($i + 1)%4 == 0 || $i == count($data)-1)
-											{
-												$products = $products.'<div class="row2" style="margin-top: 10%;margin-bottom: -12%">'.$temp.'</div>';
-												$temp = '';
-											}
-										}
-										$products = "'".$products."'";
-										$script = "<script>document.getElementById('search_result').innerHTML = ".$products."</script>";
-										echo($script);
-										require_once('../utils/close_db.php');
-									}
-								?>
                             </div>
                             <a class="closebtn" onclick="closeNav()" style="cursor: pointer; color: #FF8C00;">×</a>
                         </div>
@@ -147,22 +114,19 @@
                         $("#searchFormGroup").submit(function(event) {
                             event.preventDefault(); //prevent default action 
                             var post_url = $(this).attr("action"); //get form action url
-                            var request_method = $(this).attr("method"); //get form GET/POST method
+                            // var request_method = $(this).attr("method"); //get form GET/POST method
                             var form_data = $(this).serialize(); //Encode form elements for submission
                             sessionStorage.setItem("inputSearch", $("#input").val());
                             sessionStorage.setItem("search_type", $("#search_type").val());
                             sessionStorage.setItem("product_type", $("#product_type").val());
                             // console.log(form_data);
-                            $.ajax({
-                                url: post_url,
-                                type: request_method,
-                                data: form_data
-                            }).done(function(response) {
-                                $("body").html(response);
-                                        //focus input search
-                                
+                            $.get("../thuan/searchsp.php", { txtSearch:$("#input").val(), priceValue:$("#search_type").val(), typeId:$("#product_type").val()}, function(data){
+                                $("#search_result").html(data);
                                 openNav();
                             });
+                        });
+                        $.get("../thuan/loadbestprod.php", { }, function(data){
+                            $("#load-best-prod").html(data);
                         });
 
                     });
@@ -248,12 +212,11 @@
             </div>
         </div>
         <div class="small-container" id="bs&na">
-            <h2 class="title">Best sellers</h2>
-            <div class="row2" id="bestSeller">
-            </div>
+            <!-- <h2 class="title">Best sellers</h2>
+            <div class="row2" id="bestSeller"></div>
             <h2 class="title">News arrivals</h2>
-            <div class="row2" id="newArrival">
-            </div>
+            <div class="row2" id="newArrival"></div>             -->
+            <div id="load-best-prod"></div>
         </div>
 
         <div class="small-container" id="all_products">
@@ -265,6 +228,25 @@
                 $typePagination = $_GET["type"];
                 require_once('../utils/connect_db.php');    
                 if($typePagination == "all") {
+                    ['countProducts' => $counts] = require '../Model/product.php';
+                    $maxItems = $counts($conn);
+                    $maxPage = 8;
+                    $totalPages = $maxItems/$maxPage;
+                    echo "<script type=\"text/javascript\">
+                    $(function() {
+                            var limit = ".$maxPage."; window.pagObj = $('#pagination').twbsPagination({
+                                totalPages : ".$totalPages.",
+                                visiblePages : 10,
+                                onPageClick : function(event, page) {
+                                    var pageEvent = page;
+                                    $.get(\"../thuan/phantrangsp.php\", { maxPageItem:limit, page:pageEvent, }, function(data){
+                                        $(\"#all_products\").html(data);
+                                    });
+                                }
+                            }).on('page', function(event, page) {
+                                console.info(page + ' (from event listening)');
+                                topFunction()
+=======
                         ['countProducts' => $counts] = require '../Model/product.php';
                         $maxItems = $counts($conn);
                         require_once('../utils/close_db.php');

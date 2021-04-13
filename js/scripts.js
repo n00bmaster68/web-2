@@ -183,23 +183,23 @@ function AccountOn()
 			break;
 		}
 
-	var temp = "";
-	for (var i = 0; i < 4; i++)
-		temp += '<div class="col-4"' + 'id="' + product_info[i].id + '">' + '<img src="' + product_info[i].img+ '"><h4>' + product_info[i].name + '</h4><div class="rating"><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span></div><p>' + product_info[i].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '</p>' + '<button class="DetailBtn"' + 'id="' + product_info[i].id + '" onclick="showProductDetail(this.id)">Details</button>' + '</div>';
-	document.getElementById("bestSeller").innerHTML = temp;
+	// var temp = "";
+	// for (var i = 0; i < 4; i++)
+	// 	temp += '<div class="col-4"' + 'id="' + product_info[i].id + '">' + '<img src="' + product_info[i].img+ '"><h4>' + product_info[i].name + '</h4><div class="rating"><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span></div><p>' + product_info[i].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '</p>' + '<button class="DetailBtn"' + 'id="' + product_info[i].id + '" onclick="showProductDetail(this.id)">Details</button>' + '</div>';
+	// document.getElementById("bestSeller").innerHTML = temp;
 	// console.log("best" + temp);
 
-	temp = "";
-	for (var i = product_info.length - 1; i >= product_info.length - 4; i--)
-		temp += '<div class="col4"' + 'id="' + product_info[i].id + '">' + '<img src="' + product_info[i].img+ '"><h4>' + product_info[i].name + '</h4><div class="rating"><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span></div><p>' + product_info[i].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '</p>' + '<button class="DetailBtn"' + 'id="' + product_info[i].id + '" onclick="showProductDetail(this.id)">Details</button>' + '</div>';
-	document.getElementById("bestSeller").innerHTML = temp;
+	// temp = "";
+	// for (var i = product_info.length - 1; i >= product_info.length - 4; i--)
+	// 	temp += '<div class="col4"' + 'id="' + product_info[i].id + '">' + '<img src="' + product_info[i].img+ '"><h4>' + product_info[i].name + '</h4><div class="rating"><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span></div><p>' + product_info[i].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '</p>' + '<button class="DetailBtn"' + 'id="' + product_info[i].id + '" onclick="showProductDetail(this.id)">Details</button>' + '</div>';
+	// document.getElementById("bestSeller").innerHTML = temp;
 	// console.log("best" + temp);
 
-	temp = "";
-	for (var i = product_info.length - 1; i >= product_info.length - 4; i--)
-		temp += '<div class="col4"' + 'id="' + product_info[i].id + '">' + '<img src="' + product_info[i].img+ '"><h4>' + product_info[i].name + '</h4><div class="rating"><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span></div><p>' + product_info[i].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '</p>' + '<button class="DetailBtn"' + 'id="' + product_info[i].id + '" onclick="showProductDetail(this.id)">Details</button>' + '</div>';
+	// temp = "";
+	// for (var i = product_info.length - 1; i >= product_info.length - 4; i--)
+	// 	temp += '<div class="col4"' + 'id="' + product_info[i].id + '">' + '<img src="' + product_info[i].img+ '"><h4>' + product_info[i].name + '</h4><div class="rating"><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span></div><p>' + product_info[i].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '</p>' + '<button class="DetailBtn"' + 'id="' + product_info[i].id + '" onclick="showProductDetail(this.id)">Details</button>' + '</div>';
 
-	document.getElementById("newArrival").innerHTML = temp;
+	// document.getElementById("newArrival").innerHTML = temp;
 	var c1 = 0;
 	var temp = '';
 	var product_info = JSON.parse(localStorage.getItem('product_info'));

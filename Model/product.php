@@ -10,6 +10,17 @@
             }
             return $data;
         },
+        'findAllProductsNumb' => function($conn,$number) {
+            $query ="SELECT * FROM sanpham ORDER BY RAND () LIMIT ".$number;
+            $result = mysqli_query($conn,$query);
+            $data = array();
+            if ($result) {
+                while($row = mysqli_fetch_array($result)){
+                    $data[] = $row;
+                }
+            }
+            return $data;
+        },
         'countProducts' => function($conn) {
             $query ="SELECT COUNT(*) FROM sanpham";
             $result = mysqli_query($conn,$query);
