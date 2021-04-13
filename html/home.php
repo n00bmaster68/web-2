@@ -260,34 +260,38 @@
         </div>
         <ul class="pagination" id="pagination" style="margin-top: 100px;"></ul>
         <?php
-			if (isset($_GET["type"])) {
+			if (isset($_GET["type"])) 
+            {
                 $typePagination = $_GET["type"];
-                require_once('../utils/connect_db.php');	
+                require_once('../utils/connect_db.php');    
                 if($typePagination == "all") {
-                    ['countProducts' => $counts] = require '../Model/product.php';
-                    $maxItems = $counts($conn);
-                    require_once('../utils/close_db.php');
-                    $maxPage = 8;
-                    $totalPages = $maxItems/$maxPage;
-                    echo "<script type=\"text/javascript\">
-                    $(function() {
-                            hideHeader();
-                            var limit = ".$maxPage."; window.pagObj = $('#pagination').twbsPagination({
-                                totalPages : ".$totalPages.",
-                                visiblePages : 10,
-                                onPageClick : function(event, page) {
-                                    var pageEvent = page;
-                                    $.get(\"../thuan/phantrangsp.php\", { maxPageItem:limit, page:pageEvent, }, function(data){
-                                        $(\"#all_products\").html(data);
-                                    });
-                                }
-                            }).on('page', function(event, page) {
-                                topFunction();
-                                console.info(page + ' (from event listening)');
+                        ['countProducts' => $counts] = require '../Model/product.php';
+                        $maxItems = $counts($conn);
+                        require_once('../utils/close_db.php');
+                        $maxPage = 8;
+                        $totalPages = $maxItems/$maxPage;
+                        echo "<script type=\"text/javascript\">
+                        $(function() {
+                                hideHeader();
+                                var limit = ".$maxPage."; window.pagObj = $('#pagination').twbsPagination({
+                                    totalPages : ".$totalPages.",
+                                    visiblePages : 10,
+                                    onPageClick : function(event, page) {
+                                        var pageEvent = page;
+                                        $.get(\"../thuan/phantrangsp.php\", { maxPageItem:limit, page:pageEvent, }, function(data){
+                                            $(\"#all_products\").html(data);
+                                        });
+                                    }
+                                }).on('page', function(event, page) {
+                                    topFunction();
+                                    console.info(page + ' (from event listening)');
+                                });
                             });
-                        });
-                </script>";
-                } else if ($typePagination == "shirts" || $typePagination == "pants") {
+                    </script>";
+                }
+                
+                else if ($typePagination == "shirts" || $typePagination == "pants") {
+                    // echo "check point";
                     $MaLoai = 1;
                     if ($typePagination == "pants") {
                         $MaLoai = 2;
