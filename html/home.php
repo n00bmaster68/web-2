@@ -228,25 +228,6 @@
                 $typePagination = $_GET["type"];
                 require_once('../utils/connect_db.php');    
                 if($typePagination == "all") {
-                    ['countProducts' => $counts] = require '../Model/product.php';
-                    $maxItems = $counts($conn);
-                    $maxPage = 8;
-                    $totalPages = $maxItems/$maxPage;
-                    echo "<script type=\"text/javascript\">
-                    $(function() {
-                            var limit = ".$maxPage."; window.pagObj = $('#pagination').twbsPagination({
-                                totalPages : ".$totalPages.",
-                                visiblePages : 10,
-                                onPageClick : function(event, page) {
-                                    var pageEvent = page;
-                                    $.get(\"../thuan/phantrangsp.php\", { maxPageItem:limit, page:pageEvent, }, function(data){
-                                        $(\"#all_products\").html(data);
-                                    });
-                                }
-                            }).on('page', function(event, page) {
-                                console.info(page + ' (from event listening)');
-                                topFunction()
-=======
                         ['countProducts' => $counts] = require '../Model/product.php';
                         $maxItems = $counts($conn);
                         require_once('../utils/close_db.php');
