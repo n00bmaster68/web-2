@@ -1,14 +1,38 @@
 <?php
     return [
-        // 'findAllProducts' => function($conn) {
-        //     $query ="SELECT * FROM sanpham";
-        //     $result = mysqli_query($conn,$query);
-        //     $data = array();
-        //     while($row = mysqli_fetch_array($result)){
-        //         $data[] = $row;
-        //     }
-        //     return $data;
-        // },
+        'findAllProducts' => function($conn,$from,$maxPageItem) {
+            $query ="SELECT * FROM sanpham ORDER BY GiaBan ASC
+            LIMIT $from, $maxPageItem";
+            $result = mysqli_query($conn,$query);
+            $data = array();
+            while($row = mysqli_fetch_array($result)){
+                $data[] = $row;
+            }
+            return $data;
+        },
+        'countProducts' => function($conn) {
+            $query ="SELECT COUNT(*) FROM sanpham";
+            $result = mysqli_query($conn,$query);
+            $result = $result->fetch_array();
+            return intval($result[0]);
+        },
+        'countProductsByType' => function($conn,$MaLoai) {
+            $query ="SELECT COUNT(*) FROM sanpham WHERE MaLoai = ".$MaLoai;
+            $result = mysqli_query($conn,$query);
+            $result = $result->fetch_array();
+            return intval($result[0]);
+        },
+        'findProductByType' => function($conn,$MaLoai,$from, $maxPageItem) {
+            $query ="SELECT * FROM sanpham WHERE MaLoai = ".$MaLoai." LIMIT ".$from.", ".$maxPageItem;
+            $result = mysqli_query($conn,$query);
+            $data = array();
+            if ($result) {
+                while($row = mysqli_fetch_array($result)){
+                    $data[] = $row;
+                }
+            }
+            return $data;
+        },
         'SearchProducts' => function($conn,$name,$type,$price,$typeId) {
             $condition1 = " = ";
             if (empty($typeId)) {

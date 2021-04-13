@@ -67,7 +67,7 @@
             <div class="container">
                 <div class="navbar">
                     <div class="logo">
-                        <a href="home.html">
+                        <a href="home.php">
                             <img src="..\image\logo420.png" width="380px">
                         </a>
                     </div>
@@ -110,7 +110,6 @@
 										}
 										['SearchProducts' => $array] = require '../Model/product.php';
 										$data = $array($conn,$inputSearch,$typePrice,1000000,$typeSearch);
-										
 										$products = "";
 										$temp = "";
 										
@@ -265,10 +264,8 @@
                 $typePagination = $_GET["type"];
                 require_once('../utils/connect_db.php');	
                 if($typePagination == "all") {
-                    $query = "SELECT COUNT(*) FROM sanpham";
-                    $result = mysqli_query($conn, $query);
-                    $result = $result->fetch_array();
-                    $maxItems = intval($result[0]);
+                    ['countProducts' => $counts] = require '../Model/product.php';
+                    $maxItems = $counts($conn);
                     require_once('../utils/close_db.php');
                     $maxPage = 8;
                     $totalPages = $maxItems/$maxPage;
@@ -285,6 +282,7 @@
                                 }
                             }).on('page', function(event, page) {
                                 console.info(page + ' (from event listening)');
+                                topFunction()
                             });
                         });
                 </script>";
@@ -293,10 +291,8 @@
                     if ($typePagination == "pants") {
                         $MaLoai = 2;
                     }
-                    $query = "SELECT COUNT(*) FROM sanpham WHERE MaLoai = ".$MaLoai;
-                    $result = mysqli_query($conn, $query);
-                    $result = $result->fetch_array();
-                    $maxItems = intval($result[0]);
+                    ['countProductsByType' => $counts] = require '../Model/product.php';
+                    $maxItems = $counts($conn,$MaLoai);
                     $maxPage = 8;
                     $totalPages = $maxItems/$maxPage;
                     echo "<script type=\"text/javascript\">
@@ -312,6 +308,7 @@
                                 }
                             }).on('page', function(event, page) {
                                 console.info(page + ' (from event listening)');
+                                topFunction();
                             });
                         });
                 </script>";

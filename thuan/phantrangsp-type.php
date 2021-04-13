@@ -5,21 +5,13 @@
 	$typeID = $_GET["typeID"];
 	settype ($page, "int");
 	$from = ($page - 1) * $maxPageItem;
-	$query = "SELECT * FROM sanpham WHERE MaLo = ".$typeID."
-		LIMIT $from, $maxPageItem
-	";
-    $query1 ="SELECT tenloai FROM loai"."WHERE MaLo = ".$typeID;
-    $tin1 = mysqli_query($conn, $query1);
-    $data1 = array();
-    while($row1 = mysqli_fetch_array($tin1)){
-        $data1[] = $row1;
-    }
+	
+    ['findTypeNameById' => $TenLoai] = require '../Model/category.php';
+	$data1 = $TenLoai($conn,$typeID);
 
-	$tin = mysqli_query($conn, $query);
-    $data = array();
-    while($row = mysqli_fetch_array($tin)){
-        $data[] = $row;
-    }
+    ['findProductByType' => $array] = require '../Model/product.php';
+	$data = $array($conn,$typeID,$from,$maxPageItem);
+
     require_once('../utils/close_db.php');
 
     $products = "";
@@ -38,5 +30,5 @@
         }
         $i++;
     }
-    echo('<h2 class="title" style="margin-bottom:-90px">'.$data1[0].'/page '.$page.'</h2>'.$products);
+    echo('<h2 class="title" style="margin-bottom:-90px">'.$data1.'/page '.$page.'</h2>'.$products);
 ?>
