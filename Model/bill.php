@@ -9,6 +9,38 @@
             }
             return $data;
         },
+        'findBillsByMOrY' => function($conn,$value,$condition) {
+            $query ="SELECT * FROM hoadon";
+            $result = mysqli_query($conn,$query);
+            $data = array();
+            while($row = mysqli_fetch_array($result)){
+                $data[] = $row;
+            }
+            $i = 0;
+            $flag = false;
+            $deleted = false;
+            if(strtolower($condition) == "m") {
+                $flag = true;
+            }
+            foreach($data as $rs) {
+                if(!$flag) {
+                    if ($value == date("Y", strtotime($rs['NGAYXUAT']))) {
+                        $deleted = true;
+                    }
+                } else {
+                    if ($value == date("m", strtotime($rs['NGAYXUAT']))) {
+                        $deleted = true;
+                    }
+                }
+                if(!$deleted) {
+                    unset($data[$i]);
+                } else {
+                    $deleted = false;
+                }
+                $i++;
+            }
+            return $data;
+        },
         'findBillsByStatus' => function($conn,$status) {
             $query ="SELECT * FROM hoadon WHERE TinhTrang = ".$status;
             $result = mysqli_query($conn,$query);
@@ -64,7 +96,7 @@
                     $data[] = $row;
                 }
             }
-            return $data;
+            return $data[0];
         },
     ];
 
