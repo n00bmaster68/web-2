@@ -34,7 +34,7 @@
             return intval($result[0]);
         },
         'findProductByType' => function($conn,$MaLoai,$from, $maxPageItem) {
-            $query ="SELECT * FROM sanpham WHERE MaLoai = ".$MaLoai." LIMIT ".$from.", ".$maxPageItem;
+            $query ="SELECT * FROM sanpham WHERE MaLoai = $MaLoai LIMIT $from, $maxPageItem";
             $result = mysqli_query($conn,$query);
             $data = array();
             if ($result) {
