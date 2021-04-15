@@ -9,7 +9,7 @@
             }
             return $data;
         },
-        'findBillsByMOrY' => function($conn,$value,$condition) {
+        'findBillsByMAndY' => function($conn,$month,$year) {
             $query ="SELECT * FROM hoadon";
             $result = mysqli_query($conn,$query);
             $data = array();
@@ -19,16 +19,16 @@
             $i = 0;
             $flag = false;
             $deleted = false;
-            if(strtolower($condition) == "m") {
+            if($month == 0) {
                 $flag = true;
             }
             foreach($data as $rs) {
-                if(!$flag) {
-                    if ($value == date("Y", strtotime($rs['NGAYXUAT']))) {
+                if($flag) {
+                    if ($year == date("Y", strtotime($rs['NGAYXUAT']))) {
                         $deleted = true;
                     }
                 } else {
-                    if ($value == date("m", strtotime($rs['NGAYXUAT']))) {
+                    if ($month == date("m", strtotime($rs['NGAYXUAT'])) && $year == date("Y", strtotime($rs['NGAYXUAT']))) {
                         $deleted = true;
                     }
                 }
@@ -39,6 +39,9 @@
                 }
                 $i++;
             }
+            usort($data, function ($a, $b) {
+                return -strtotime($a['NGAYXUAT']) + strtotime($b['NGAYXUAT']);
+            });
             return $data;
         },
         'findBillsByStatus' => function($conn,$status) {
@@ -58,18 +61,6 @@
                 return false;
             }
             return true;
-        },
-        'countBills' => function($conn) {
-            $query ="SELECT COUNT(*) FROM hoadon";
-            $result = mysqli_query($conn,$query);
-            $result = $result->fetch_array();
-            return intval($result[0]);
-        },
-        'countBillsByStatus' => function($conn,$status) {
-            $query ="SELECT COUNT(*) FROM hoadon WHERE TinhTrang = ".$status;
-            $result = mysqli_query($conn,$query);
-            $result = $result->fetch_array();
-            return intval($result[0]);
         },
         'deleteBill' => function($conn,$MaHD) {
             $query ="DELETE FROM hoadon WHERE ".$MaHD;
