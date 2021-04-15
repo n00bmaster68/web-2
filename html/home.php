@@ -115,7 +115,7 @@
                             event.preventDefault(); //prevent default action 
                             var post_url = $(this).attr("action"); //get form action url
                             // var request_method = $(this).attr("method"); //get form GET/POST method
-                            var form_data = $(this).serialize(); //Encode form elements for submission
+                            // var form_data = $(this).serialize(); //Encode form elements for submission
                             sessionStorage.setItem("inputSearch", $("#input").val());
                             sessionStorage.setItem("search_type", $("#search_type").val());
                             sessionStorage.setItem("product_type", $("#product_type").val());
