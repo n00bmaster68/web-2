@@ -4,7 +4,7 @@
     $yearBills = $_GET["year"];
     $res = "";
     require_once('../utils/connect_db.php');	
-    ['findBillsByMonthAndYearAndStatus' => $Bills] = require '../Model/bill.php';
+    ['findBillsByMonthAndYearAndStatus' => $Bills] = require '../Entities/bill.php';
     $data = $Bills($conn,$monthBills,$yearBills,$statusBills);
     require_once('../utils/close_db.php');
     for($i=0;$i<count($data);$i++) {

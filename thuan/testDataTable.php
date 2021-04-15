@@ -92,7 +92,7 @@
       <?php
       if(!isset($_GET["status"])){
           require_once('../utils/connect_db.php');	
-          ['findAllBills' => $Bills] = require '../Model/bill.php';
+          ['findAllBills' => $Bills] = require '../Entities/bill.php';
           $data = $Bills($conn);
           require_once('../utils/close_db.php');
           
