@@ -14,12 +14,13 @@
 </head>
 <body>
 <form action="" method="GET" id="BillFormGroup">
-    <select id="statusBills" name="status" class="custom-select mb-3" style="width: 200px;" onchange="funcClickBtn()">
+    <select id="statusBills" name="status" class="custom-select mb-3" style="width: 200px;" onchange="ClickBtnBill()">
         <option selected value='-1'>>--Select Status--<</option>
         <option value='0'>Chua xu ly</option>
         <option value='1'>Da xu ly</option>
+        <option value='2'>Da giao hang</option>
     </select>
-    <select id="monthBills" name="month" class="custom-select mb-3" style="width: 280px;" onchange="funcClickBtn()">
+    <select id="monthBills" name="month" class="custom-select mb-3" style="width: 280px;" onchange="ClickBtnBill()">
         <option selected value='0'>>--Select Month--<</option>
         <option value='1'>Janaury</option>
         <option value='2'>February</option>
@@ -34,14 +35,20 @@
         <option value='11'>November</option>
         <option value='12'>December</option>
     </select>
-    <select id="yearBills" name="year" class="custom-select mb-3" style="width: 280px;" onchange="funcClickBtn()">
+    <select id="yearBills" name="year" class="custom-select mb-3" style="width: 280px;" onchange="ClickBtnBill()">
     </select>
     <button class="btn btn-warning" onclick="funcAllBills()" style="cursor: pointer; margin-left: 20px;">All Bills</button>
     <button class="btn btn-primary" onclick="" style="cursor: pointer; margin-left: 20px;">New Bill</button>
     <input type="submit" name="submit" value="Submit-Bill" id="btnSubmitBill"
                             style="visibility: hidden; opacity: 0;" />    
 </form>
-
+<form action="" method="GET" id="formActionBill">
+    <input type="hidden" name="statusBill" value="" id="statusBill">
+    <input type="hidden" name="idBill" value="" id="idBill">
+    <input type="hidden" name="typeActionBill" value="" id="typeActionBill">
+    <input type="submit" name="submit" value="Submit-Bill" id="btnActionBill"
+                            style="visibility: hidden; opacity: 0;" />
+</form>
 <script>
     var start = 2015;
     var end = new Date().getFullYear();
@@ -51,28 +58,24 @@
     }
     document.getElementById("yearBills").innerHTML = options;
 
-    function funcClickBtn() {
-        if($("#monthBills").val() != 0 && $("#yearBills").val() == 0){
-            alert("vui long chon so nam can xem !");
-            return;
-        }
-        document.getElementById("btnSubmitBill").click();
-    }
-
-    function funcAllBills(){
-        $("#statusBills").val('-1');
-        $("#monthBills").val('0');
-        $("#yearBills").val('0');
-        funcClickBtn();
-    }
-
     $(document).ready(function() {
         //submit form
         $("#BillFormGroup").submit(function(event) {
             event.preventDefault(); //prevent default action 
             var post_url = $(this).attr("action"); //get form action url
-            $.get("../thuan/billsManager.php", { status:$("#statusBills").val(), month:$("#monthBills").val(), year:$("#yearBills").val()}, function(data){
+            $.get("../thuan/listBills.php", { status:$("#statusBills").val(), month:$("#monthBills").val(), year:$("#yearBills").val()}, function(data){
                 $("#table-result").html(data);
+            });
+        });
+        $("#formActionBill").submit(function(event) {
+            event.preventDefault(); //prevent default action 
+            var post_url = $(this).attr("action"); //get form action url
+            $.get("../thuan/billsManager.php", { statusBill:$("#statusBill").val(), idBill:$("#idBill").val(), typeActionBill:$("#typeActionBill").val()}, function(data){
+                // $("#table-result").html(data);
+                //return result from action of bill and show popup
+
+                document.getElementById("btnSubmitBill").click();
+                aler("thuc hien thanh cong !");
             });
         });
     });
@@ -101,13 +104,15 @@
               $price1 =  number_format($price, 0, '', '.');
               $status = "";
               if($data[$i]['TinhTrang'] == 0) {
-                  $status = "Chua xu ly";
+                $status = "Chua xu ly";
+              } else if($data[$i]['TinhTrang'] == 1){
+                $status = "Da xu ly";
               } else {
-                  $status = "Da xu ly";
+                $status = "Don hang da giao";
               }
-              echo "<tr><td style=\"width: 75px;\">".$data[$i]['MaHD']."</td><td style=\"width: 75px;\">".$data[$i]['MaKH']."</td><td>".$status."</td><td>".$data[$i]['NGAYXUAT']."</td><td>".$price1." VND</td><td><button onclick=\"infoBill()\" style=\"margin-left:30px;\" class=\"btn btn-sm btn-info btn-info\" data-toggle=\"tooltip\" title=\"Info\"><i class=\"fa fa-shopping-cart\" aria-hidden=\"true\"></i></button>
-              <button onclick=\"editBill()\" style=\"margin-left:1px;\" class=\"btn btn-sm btn-primary btn-edit\" data-toggle=\"tooltip\" title=\"Update\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></button>
-              <button onclick=\"deleteBill()\" style=\"margin-left:1px;\" class=\"btn btn-sm btn-danger btn-delete\" data-toggle=\"tooltip\" title=\"Delete\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>
+              echo "<tr><td style=\"width: 75px;\">".$data[$i]['MaHD']."</td><td style=\"width: 75px;\">".$data[$i]['MaKH']."</td><td>".$status."</td><td>".$data[$i]['NGAYXUAT']."</td><td>".$price1." VND</td><td><button onclick=\"infoBill(".$data[$i]['MaHD'].")\" style=\"margin-left:30px;\" class=\"btn btn-sm btn-info btn-info\" data-toggle=\"tooltip\" title=\"Info\"><i class=\"fa fa-shopping-cart\" aria-hidden=\"true\"></i></button>
+              <button onclick=\"editBill(".$data[$i]['MaHD'].",".$data[$i]['TinhTrang'].")\" style=\"margin-left:1px;\" class=\"btn btn-sm btn-primary btn-edit\" data-toggle=\"tooltip\" title=\"Update\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></button>
+              <button onclick=\"deleteBill(".$data[$i]['MaHD'].")\" style=\"margin-left:1px;\" class=\"btn btn-sm btn-danger btn-delete\" data-toggle=\"tooltip\" title=\"Delete\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>
               </td></tr>";
           }
           if(count($data) == 0) {

@@ -1020,10 +1020,47 @@ function forgotPW()
 
 function hideHeader() 
 {
-	console.log("runnnninuiqwefuqweuqwerfvu");
 	document.getElementById("Endorser").style.display = "none";
 	document.getElementById("propagation").style.display = "none";
 	document.getElementById("bs&na").style.display = "none";
 	document.getElementById("home").style.height = "100px";
 	document.getElementById("all_products").style.display = "block";
+}
+
+function editBill(idBill, statusBill) {
+	if (statusBill == 2){
+		alert("Don hang da duoc giao, ban khong the sua !")
+		return;
+	}
+	document.getElementById('statusBill').value = statusBill;
+	document.getElementById('idBill').value = idBill;
+	document.getElementById('typeActionBill').value = "edit";
+	document.getElementById("btnActionBill").click();
+}
+
+function infoBill(idBill) {
+	document.getElementById('idBill').value = idBill;
+	document.getElementById('typeActionBill').value = "info";
+	document.getElementById("btnActionBill").click();
+}
+
+function deleteBill(idBill){
+	document.getElementById('idBill').value = idBill;
+	document.getElementById('typeActionBill').value = "delete";
+	document.getElementById("btnActionBill").click();
+}
+
+function ClickBtnBill() {
+	if($("#monthBills").val() != 0 && $("#yearBills").val() == 0){
+		alert("vui long chon so nam can xem !");
+		return;
+	}
+	document.getElementById("btnSubmitBill").click();
+}
+
+function funcAllBills(){
+	$("#statusBills").val('-1');
+	$("#monthBills").val('0');
+	$("#yearBills").val('0');
+	ClickBtnBill();
 }

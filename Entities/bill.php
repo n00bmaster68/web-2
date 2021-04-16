@@ -75,8 +75,8 @@
             }
             return true;
         },
-        'updateBill' => function($conn,$MaHD) {
-            $query ="UPDATE hoadon SET TinhTrang = 1 WHERE ".$MaHD;
+        'updateBill' => function($conn,$MaHD,$status) {
+            $query ="UPDATE hoadon SET TinhTrang = ".$status." WHERE ".$MaHD;
             $result = mysqli_query($conn,$query);
             if(!$result) {
                 return false;
