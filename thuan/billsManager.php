@@ -8,17 +8,29 @@
         ['updateBill' => $check] = require '../Entities/bill.php';
         $flag = $check($conn,$idBill,$statusBill);
         if(!$flag) {
-            $res = $res."<script>alert('update failed !');</script>";
+            $res = $res."<script>document.getElementById('btnConfirm').style=\"display: none\";
+            document.getElementById('message-confirm').style=\"color: red\";
+            document.getElementById('message-confirm').innerHTML=\"Change status failed !\";
+            document.getElementById('btnConfirmNo').innerHTML=\"Close\";</script>";
         } else {
-            $res = $res."<script>alert('update success !');</script>";
+            $res = $res."<script>document.getElementById('btnConfirm').style=\"display: none\";
+            document.getElementById('message-confirm').style=\"color: green\";
+            document.getElementById('message-confirm').innerHTML=\"Change status success !\";
+            document.getElementById('btnConfirmNo').innerHTML=\"Close\";</script>";
         }        
     } else if($typeActionBill == "delete") {
         ['deleteBill' => $check] = require '../Entities/bill.php';
         $flag = $check($conn,$idBill);
         if(!$flag) {
-            $res = $res."<script>alert('delete failed !');</script>";
+            $res = $res."<script>document.getElementById('btnConfirm').style=\"display: none\";
+            document.getElementById('message-confirm').style=\"color: red\";
+            document.getElementById('message-confirm').innerHTML=\"Delete failed !\";
+            document.getElementById('btnConfirmNo').innerHTML=\"Close\";</script>";
         } else {
-            $res = $res."<script>alert('delete success !');</script>";
+            $res = $res."<script>document.getElementById('btnConfirm').style=\"display: none\";
+            document.getElementById('message-confirm').style=\"color: red\";
+            document.getElementById('message-confirm').innerHTML=\"Delete success !\";
+            document.getElementById('btnConfirmNo').innerHTML=\"Close\";</script>";
         }       
     } else {
         ['findDetailBillByIdBill' => $bill] = require '../Entities/bill.php';

@@ -1029,14 +1029,21 @@ function hideHeader()
 
 function editBill(idBill, statusBill) {
 	if (statusBill >= 2){
-		alert("Don hang da duoc giao, ban khong the sua !")
+		document.getElementById('btnConfirm').style="display: none";
+		document.getElementById('message-confirm').innerHTML="The order has been shipped !";
+		document.getElementById('btnConfirmNo').innerHTML="Close";
+		document.getElementById('btnpopupConfirm').click();
 		return;
 	}
-	statusBill++;
-	document.getElementById('statusBill').value = statusBill;
-	document.getElementById('idBill').value = idBill;
-	document.getElementById('typeActionBill').value = "edit";
-	document.getElementById("btnActionBill").click();
+	document.getElementById('message-confirm').innerHTML="Do you want to change the status of the order ?";
+	document.getElementById('btnpopupConfirm').click();
+	document.getElementById('btnConfirm').onclick = function() {
+		statusBill++;
+		document.getElementById('statusBill').value = statusBill;
+		document.getElementById('idBill').value = idBill;
+		document.getElementById('typeActionBill').value = "edit";
+		document.getElementById("btnActionBill").click();
+	}
 }
 
 function infoBill(idBill) {
@@ -1046,14 +1053,21 @@ function infoBill(idBill) {
 }
 
 function deleteBill(idBill){
-	document.getElementById('idBill').value = idBill;
-	document.getElementById('typeActionBill').value = "delete";
-	document.getElementById("btnActionBill").click();
+	document.getElementById('btnpopupConfirm').click();
+	document.getElementById('btnConfirm').onclick = function() {
+		document.getElementById('idBill').value = idBill;
+		document.getElementById('typeActionBill').value = "delete";
+		document.getElementById("btnActionBill").click();
+	}
 }
 
 function ClickBtnBill() {
 	if($("#monthBills").val() != 0 && $("#yearBills").val() == 0){
-		alert("vui long chon so nam can xem !");
+		document.getElementById('btnConfirm').style="display: none";
+		document.getElementById('message-confirm').innerHTML="Please select the number of years !";
+		document.getElementById('btnConfirmNo').innerHTML="Close";
+		document.getElementById('btnpopupConfirm').click();
+		// alert("vui long chon so nam can xem !");
 		return;
 	}
 	document.getElementById("btnSubmitBill").click();
