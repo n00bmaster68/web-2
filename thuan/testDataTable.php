@@ -42,7 +42,7 @@
     <input type="submit" name="submit" value="Submit-Bill" id="btnSubmitBill"
                             style="visibility: hidden; opacity: 0;" />    
 </form>
-<form action="" method="GET" id="formActionBill">
+<form action="" method="POST" id="formActionBill">
     <input type="hidden" name="statusBill" value="" id="statusBill">
     <input type="hidden" name="idBill" value="" id="idBill">
     <input type="hidden" name="typeActionBill" value="" id="typeActionBill">
@@ -70,12 +70,11 @@
         $("#formActionBill").submit(function(event) {
             event.preventDefault(); //prevent default action 
             var post_url = $(this).attr("action"); //get form action url
-            $.get("../thuan/billsManager.php", { statusBill:$("#statusBill").val(), idBill:$("#idBill").val(), typeActionBill:$("#typeActionBill").val()}, function(data){
-                // $("#table-result").html(data);
+            $.post("../thuan/billsManager.php", { statusBill:$("#statusBill").val(), idBill:$("#idBill").val(), typeActionBill:$("#typeActionBill").val()}, function(data){
+                $("#action-result").html(data);
                 //return result from action of bill and show popup
 
                 document.getElementById("btnSubmitBill").click();
-                aler("thuc hien thanh cong !");
             });
         });
     });
@@ -111,7 +110,7 @@
                 $status = "Don hang da giao";
               }
               echo "<tr><td style=\"width: 75px;\">".$data[$i]['MaHD']."</td><td style=\"width: 75px;\">".$data[$i]['MaKH']."</td><td>".$status."</td><td>".$data[$i]['NGAYXUAT']."</td><td>".$price1." VND</td><td><button onclick=\"infoBill(".$data[$i]['MaHD'].")\" style=\"margin-left:30px;\" class=\"btn btn-sm btn-info btn-info\" data-toggle=\"tooltip\" title=\"Info\"><i class=\"fa fa-shopping-cart\" aria-hidden=\"true\"></i></button>
-              <button onclick=\"editBill(".$data[$i]['MaHD'].",".$data[$i]['TinhTrang'].")\" style=\"margin-left:1px;\" class=\"btn btn-sm btn-primary btn-edit\" data-toggle=\"tooltip\" title=\"Update\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></button>
+              <button onclick=\"editBill(".$data[$i]['MaHD'].",".$data[$i]['TinhTrang'].")\" style=\"margin-left:1px;\" class=\"btn btn-sm btn-primary btn-edit\" data-toggle=\"tooltip\" title=\"Update\"><i class=\"fa fa-level-up\" aria-hidden=\"true\"></i></button>
               <button onclick=\"deleteBill(".$data[$i]['MaHD'].")\" style=\"margin-left:1px;\" class=\"btn btn-sm btn-danger btn-delete\" data-toggle=\"tooltip\" title=\"Delete\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>
               </td></tr>";
           }
@@ -122,5 +121,7 @@
       ?>
     </tbody>
 </table>
+<div id="action-result"></div>
+<script src="../js/scripts.js"></script>
 </body>
 </html>

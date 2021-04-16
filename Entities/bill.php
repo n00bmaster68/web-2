@@ -68,7 +68,7 @@
             return true;
         },
         'deleteBill' => function($conn,$MaHD) {
-            $query ="DELETE FROM hoadon WHERE ".$MaHD;
+            $query ="DELETE FROM hoadon WHERE MaHD = ".$MaHD;
             $result = mysqli_query($conn,$query);
             if(!$result) {
                 return false;
@@ -76,7 +76,7 @@
             return true;
         },
         'updateBill' => function($conn,$MaHD,$status) {
-            $query ="UPDATE hoadon SET TinhTrang = ".$status." WHERE ".$MaHD;
+            $query ="UPDATE hoadon SET TinhTrang = ".$status." WHERE MaHD = ".$MaHD;
             $result = mysqli_query($conn,$query);
             if(!$result) {
                 return false;

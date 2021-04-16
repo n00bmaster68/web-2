@@ -1028,10 +1028,11 @@ function hideHeader()
 }
 
 function editBill(idBill, statusBill) {
-	if (statusBill == 2){
+	if (statusBill >= 2){
 		alert("Don hang da duoc giao, ban khong the sua !")
 		return;
 	}
+	statusBill++;
 	document.getElementById('statusBill').value = statusBill;
 	document.getElementById('idBill').value = idBill;
 	document.getElementById('typeActionBill').value = "edit";
