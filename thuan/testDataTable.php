@@ -38,7 +38,6 @@
     <select id="yearBills" name="year" class="custom-select mb-3" style="width: 280px;" onchange="ClickBtnBill()">
     </select>
     <button class="btn btn-warning" onclick="funcAllBills()" style="cursor: pointer; margin-left: 20px;">All Bills</button>
-    <button class="btn btn-primary" onclick="" style="cursor: pointer; margin-left: 20px;">New Bill</button>
     <input type="submit" name="submit" value="Submit-Bill" id="btnSubmitBill"
                             style="visibility: hidden; opacity: 0;" />    
 </form>

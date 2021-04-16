@@ -21,10 +21,13 @@
             $res = $res."<script>alert('delete success !');</script>";
         }       
     } else {
-        ['findBillById' => $bill] = require '../Entities/bill.php';
+        ['findDetailBillByIdBill' => $bill] = require '../Entities/bill.php';
         $data = $bill($conn,$idBill);
-        //day du lieu vo code html de trinh bay $data['MaHD']
-        $res = $res."mahd = ".$data['MaHD']."<br>makh = ".$data['MaKH']."<br>ngayxuat = ".$data['NGAYXUAT']."<br>tinhtrang = ".$data['TinhTrang']."<br>thanhtien = ".$data['ThanhTien'];
+        if (count($data) != 0){
+            //day du lieu vo code html de trinh bay (du lieu bao gom chitiethd,ten va gia sp) $data['MaHD'] va $data['chitiethd']['Ten'] 
+            //['chitiethd']['Gia'] ['chitiethd']['MaSP']
+            $res = $res."mahd = ".$data['MaHD']."<br>makh = ".$data['MaKH']."<br>ngayxuat = ".$data['NGAYXUAT']."<br>tinhtrang = ".$data['TinhTrang']."<br>thanhtien = ".$data['ThanhTien'];
+        }
     }
     require_once('../utils/close_db.php');
     echo $res;

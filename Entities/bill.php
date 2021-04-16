@@ -83,7 +83,7 @@
             }
             return true;
         },
-        'findBillById' => function($conn,$MaHD) {
+        'findDetailBillByIdBill' => function($conn,$MaHD) {
             $query ="SELECT * FROM hoadon WHERE MaHD = ".$MaHD;
             $result = mysqli_query($conn,$query);
             $data = array();
@@ -91,6 +91,11 @@
                 while($row = mysqli_fetch_array($result)){
                     $data[] = $row;
                 }
+            }
+            ['findByIdBill' => $array] = require '../Entities/detailbill.php';
+	        $dataDetailBill = $array($conn,$MaHD);
+            if (count($dataDetailBill) != 0){
+                $data[0] = array_merge($data[0],array("chitiethd" => $dataDetailBill));
             }
             return $data[0];
         },
