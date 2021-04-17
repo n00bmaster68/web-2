@@ -35,11 +35,10 @@
     } else {
         ['findDetailBillByIdBill' => $bill] = require '../Entities/bill.php';
         $data = $bill($conn,$idBill);
-        if (count($data) != 0){
-            //day du lieu vo code html de trinh bay (du lieu bao gom chitiethd,ten va gia sp) $data['MaHD'] va $data['chitiethd']['Ten'] 
-            //['chitiethd']['Gia'] ['chitiethd']['MaSP']
-            $res = $res."mahd = ".$data['MaHD']."<br>makh = ".$data['MaKH']."<br>ngayxuat = ".$data['NGAYXUAT']."<br>tinhtrang = ".$data['TinhTrang']."<br>thanhtien = ".$data['ThanhTien'];
-        }
+        //day du lieu vo code html de trinh bay (du lieu bao gom chitiethd,ten va gia sp) $data['MaHD'] va $data['chitiethd'][$i]['Ten'] 
+        //$data['chitiethd'][$i]['GiaBan'] $data['chitiethd'][$i]['MaSP']
+        // $res = $res."mahd = ".$data['MaHD']."<br>makh = ".$data['MaKH']."<br>ngayxuat = ".$data['NGAYXUAT']."<br>tinhtrang = ".$data['TinhTrang']."<br>thanhtien = ".$data['ThanhTien'];
+        print_r($data);
     }
     require_once('../utils/close_db.php');
     echo $res;

@@ -13,39 +13,22 @@
             return $data;
         },
         'findBillsByMonthAndYearAndStatus' => function($conn,$month,$year,$status) {
-            $query ="SELECT * FROM hoadon";
+            $condition1 = " = ";
+            $condition2 = " = ";
+            if ($month == 0) {
+                $condition1 = " <> ";
+            }
+            if ($year == 0) {
+                $condition2 = " <> ";
+            }
+            $query ="SELECT * FROM hoadon WHERE month(NGAYXUAT)".$condition1.$month." AND year(NGAYXUAT)".$condition2.$year;
             if ($status >=0 ){
-                $query = $query." WHERE TinhTrang = ".$status;
+                $query = $query." AND TinhTrang = ".$status;
             }
             $result = mysqli_query($conn,$query);
             $data = array();
             while($row = mysqli_fetch_array($result)){
                 $data[] = $row;
-            }
-            $i = 0;
-            $flag = false;
-            $deleted = false;
-            if($month == 0) {
-                $flag = true;
-            }
-            if($year != 0) {
-                foreach($data as $rs) {
-                    if($flag) {
-                        if ($year == date("Y", strtotime($rs['NGAYXUAT']))) {
-                            $deleted = true;
-                        }
-                    } else {
-                        if ($month == date("m", strtotime($rs['NGAYXUAT'])) && $year == date("Y", strtotime($rs['NGAYXUAT']))) {
-                            $deleted = true;
-                        }
-                    }
-                    if(!$deleted) {
-                        unset($data[$i]);
-                    } else {
-                        $deleted = false;
-                    }
-                    $i++;
-                }
             }
             if ($status < 0) {
                 usort($data, function ($a, $b) {
@@ -85,20 +68,13 @@
             return true;
         },
         'findDetailBillByIdBill' => function($conn,$MaHD) {
-            $query ="SELECT * FROM hoadon WHERE MaHD = ".$MaHD;
+            $query ="SELECT sp.Ten,sp.MaLoai,sp.GiaBan as GiaSP,cthd.SoLuong,cthd.GiaBan FROM chitiethd AS cthd INNER JOIN sanpham AS sp ON cthd.MaSP = sp.MaSP WHERE MaHD = $MaHD";
             $result = mysqli_query($conn,$query);
             $data = array();
-            if ($result) {
-                while($row = mysqli_fetch_array($result)){
-                    $data[] = $row;
-                }
+            while($row = mysqli_fetch_array($result)){
+                $data[] = $row;
             }
-            ['findByIdBill' => $array] = require '../Entities/detailbill.php';
-	        $dataDetailBill = $array($conn,$MaHD);
-            if (count($dataDetailBill) != 0){
-                $data[0] = array_merge($data[0],array("chitiethd" => $dataDetailBill));
-            }
-            return $data[0];
+            return $data;
         },
     ];
 

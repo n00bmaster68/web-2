@@ -21,17 +21,6 @@
             }
             return $data;
         },
-        'findProductByIdForBill' => function($conn,$idprod) {
-            $query ="SELECT Ten,GiaBan FROM sanpham WHERE MaSP = ".$idprod;
-            $result = mysqli_query($conn,$query);
-            $data = array();
-            if ($result) {
-                while($row = mysqli_fetch_array($result)){
-                    $data[] = $row;
-                }
-            }
-            return $data[0];
-        },
         'findProductById' => function($conn,$idprod) {
             $query ="SELECT * FROM sanpham WHERE MaSP = ".$idprod;
             $result = mysqli_query($conn,$query);
