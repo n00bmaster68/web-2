@@ -58,9 +58,10 @@
             }
             return $data;
         },
-        'insertBill' => function($conn,$MaKH,$TinhTrang,$ThanhTien,$NgayXuat) {
+        'insertBill' => function($conn,$Bills) {
             //date('Y-m-d H:i:s')
-            $query ="INSERT INTO hoadon(MaKH,TinhTrang,ThanhTien,NGAYXUAT) VALUES ($MaKH,$TinhTrang,$ThanhTien,$NgayXuat)";
+            $query ="INSERT INTO hoadon(MaKH,TinhTrang,ThanhTien,NGAYXUAT) VALUES (".
+                $Bills['MaKH'].",".$Bills['TinhTrang'].",".$Bills['ThanhTien'].",'".$Bills['NGAYXUAT']."')";
             $result = mysqli_query($conn,$query);
             if(!$result) {
                 return false;

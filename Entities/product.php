@@ -85,5 +85,32 @@
             }
             return $data;
         },
+        'updateProduct' => function($conn,$products) {
+            $query ="UPDATE sanpham SET Ten = '".$products['Ten']."',Hinh = '".$products['Hinh']."',GiaBan = "
+            .$products['GiaBan'].",MaLoai = ".$products['MaLoai'].",SoLuongTon = ".$products['SoLuongTon']
+            ." WHERE MaSP = ".$products['MaSP'];
+            $result = mysqli_query($conn,$query);
+            if(!$result) {
+                return false;
+            }
+            return true;
+        },
+        'insertProduct' => function($conn,$products) {
+            $query ="INSERT INTO sanpham (Ten,Hinh,GiaBan,MaLoai,SoLuongTon) VALUES ('".$products['Ten']."','".$products['Hinh']."',"
+            .$products['GiaBan'].",".$products['MaLoai'].",".$products['SoLuongTon'].")";
+            $result = mysqli_query($conn,$query);
+            if(!$result) {
+                return false;
+            }
+            return true;
+        },
+        'deleteProduct' => function($conn,$MaSP) {
+            $query ="DELETE FROM sanpham WHERE MaSP = ".$MaSP;
+            $result = mysqli_query($conn,$query);
+            if(!$result) {
+                return false;
+            }
+            return true;
+        },
     ];
 
