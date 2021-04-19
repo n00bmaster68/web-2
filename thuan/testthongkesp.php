@@ -1,14 +1,12 @@
 <?php
-require_once('../utils/connect_db.php');	
-['sellproducts' => $detailBill] = require '../Entities/detailbill.php';
-$idBill = 10;
-$data = $detailBill($conn,$idBill);
+require_once('../utils/connect_db.php');
+['statisticProducts' => $statistic] = require '../Entities/detailbill.php';
+$data = $statistic($conn,4,2021,12,1);
 require_once('../utils/close_db.php');
-print_r($data);
-// $res = $data['MaHD']."<br>".$data['NGAYXUAT']."<br>";
-// for ($i=0; $i <count($data['chitiethd']) ; $i++) { 
-//     $res = $res.$data['chitiethd'][$i]['MaSP']."<br>"
-//     .$data['chitiethd'][$i]['GiaBan']."<br>".$data['chitiethd'][$i]['Ten']."<br>"
-//     .$data['chitiethd'][$i]['MaLoai']."<br>";
-// }
-// echo $res;
+$res = "";
+for ($i=0; $i <count($data) ; $i++) { 
+    $res = $res.$data[$i]['MaSP']."<br>"
+    .$data[$i]['TenLoai']."<br>".$data[$i]['Ten']."<br>"
+    .$data[$i]['tongsoluong']."<br>".$data[$i]['tonggia']."<br><br><br>";
+}
+echo $res;

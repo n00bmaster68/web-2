@@ -43,7 +43,7 @@
         },
         options: {
             title: {
-                text: "Number of passengers carried in 2017 (in mio.)",
+                text: "Hot-selling product statistics table",
                 display: true
             },
             legend: {

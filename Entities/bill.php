@@ -68,7 +68,8 @@
             return true;
         },
         'findDetailBillByIdBill' => function($conn,$MaHD) {
-            $query ="SELECT sp.Ten,sp.MaLoai,sp.GiaBan as GiaSP,cthd.SoLuong,cthd.GiaBan FROM chitiethd AS cthd INNER JOIN sanpham AS sp ON cthd.MaSP = sp.MaSP WHERE MaHD = $MaHD";
+            $query ="SELECT sp.Ten,loai.TenLoai,sp.GiaBan as GiaSP,cthd.SoLuong,cthd.GiaBan AS TongTien FROM chitiethd AS cthd 
+            INNER JOIN sanpham AS sp ON cthd.MaSP = sp.MaSP INNER JOIN loai AS loai ON loai.MaLo = sp.MaLoai WHERE MaHD = $MaHD";
             $result = mysqli_query($conn,$query);
             $data = array();
             while($row = mysqli_fetch_array($result)){
