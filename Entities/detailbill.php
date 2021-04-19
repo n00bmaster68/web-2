@@ -25,7 +25,6 @@
                 $condition3 = $condition3 . $data1[$i]['MaHD'].",";
             }
             $condition3 = substr($condition3, 0, -1).") ";
-            echo $condition3;
 
             // SELECT sp.MaSP,sp.Ten,sp.MaLoai,loai.TenLoai,SUM(cthd.SoLuong) AS tongsoluong,SUM(cthd.GiaBan) AS tonggia FROM chitiethd AS cthd INNER JOIN sanpham AS sp ON cthd.MaSP = sp.MaSP INNER JOIN loai AS loai ON loai.MaLo = sp.MaLoai 
             // WHERE MaHD IN(10,15) AND SP.MaLoai <> 0
