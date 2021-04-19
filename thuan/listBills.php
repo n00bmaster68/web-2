@@ -26,5 +26,5 @@
     if(count($data) == 0) {
         $res = $res."<tr style=\"border: 1px solid orange;\"><td style=\"border: 0px;\"></td><td style=\"border: 0px;\"></td><td style=\"border: 0px; width: 100%;\">Khong co du lieu nao duoc tim thay !</td><td style=\"border: 0px;\"></td><td style=\"border: 0px;\"></td></tr>";
     }
-    echo($res);
+    echo $res;
 ?>
