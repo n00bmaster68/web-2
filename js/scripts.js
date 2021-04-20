@@ -9,19 +9,19 @@ var num_shirt;
 var num_pant;
 var num;
 var mybutton = document.getElementById("BtnTop");
-window.onscroll = function() {scrollFunction()};
+// window.onscroll = function() {scrollFunction()};
 	
-function scrollFunction() 
-{
-	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)
-	{
-		mybutton.style.display = "block";
-	} 
-	else 
-	{
-		mybutton.style.display = "none";
-	}
-}
+// function scrollFunction() 
+// {
+// 	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)
+// 	{
+// 		mybutton.style.display = "block";
+// 	} 
+// 	else 
+// 	{
+// 		mybutton.style.display = "none";
+// 	}
+// }
 
 function topFunction() 
 {
@@ -29,8 +29,8 @@ function topFunction()
 		document.documentElement.scrollTop = 0;
 }
 
-var MenuItems = document.getElementById("MenuItems");
-MenuItems.style.maxHeight = "0px";
+// var MenuItems = document.getElementById("MenuItems");
+// MenuItems.style.maxHeight = "0px";
 
 function menutoggle()
 {
@@ -276,7 +276,7 @@ function open_login_reg_form()
 	document.getElementById("account").style.display = "block";
 	document.getElementById("propagation").style.display = "none";
 	// document.getElementById("pagination").style.display = "none";
-	document.getElementById('product_detail').style.top = "-300%";
+	// document.getElementById('product_detail').style.top = "-300%";
 	var x = document.getElementById("home");
 	{
 		document.getElementById("home").style.height = "680px";
@@ -297,6 +297,14 @@ function close_login_reg_form()
 	{
 		document.getElementById("home").style.height = "100px";
 	}
+}
+
+function close_login_reg_form2()
+{
+	document.getElementById("account").style.display = "none";
+	document.getElementById("home").style.height = "760px";
+	document.getElementById("Endorser").style.display = "block";
+	document.getElementById("propagation").style.display = "block";
 }
 
 
@@ -572,6 +580,7 @@ function showProducts(){
 
 function openNav()
 {
+	document.getElementById("input").disabled = false;
 	document.getElementById("search").style.width = "100%";
 	//get data from sessionStorage to set value for form
 	if (sessionStorage.getItem("inputSearch") != "") {
@@ -588,6 +597,7 @@ function closeNav()
 	sessionStorage.removeItem('search_type');
 	sessionStorage.removeItem('product_type');
 	document.getElementById("search").style.width = "0%";
+	document.getElementById("input").disabled = true;
 }
 
 function quantitydown()
@@ -1020,10 +1030,63 @@ function forgotPW()
 
 function hideHeader() 
 {
-	console.log("runnnninuiqwefuqweuqwerfvu");
 	document.getElementById("Endorser").style.display = "none";
 	document.getElementById("propagation").style.display = "none";
 	document.getElementById("bs&na").style.display = "none";
 	document.getElementById("home").style.height = "100px";
 	document.getElementById("all_products").style.display = "block";
+}
+
+function editBill(idBill, statusBill) {
+	if (statusBill >= 2){
+		document.getElementById('btnConfirm').style="display: none";
+		document.getElementById('message-confirm').innerHTML="The order has been shipped !";
+		document.getElementById('btnConfirmNo').innerHTML="Close";
+		document.getElementById('btnpopupConfirm').click();
+		return;
+	}
+	document.getElementById('message-confirm').innerHTML="Do you want to change the status of the order ?";
+	document.getElementById('btnpopupConfirm').click();
+	document.getElementById('btnConfirm').onclick = function() {
+		statusBill++;
+		document.getElementById('statusBill').value = statusBill;
+		document.getElementById('idBill').value = idBill;
+		document.getElementById('typeActionBill').value = "edit";
+		document.getElementById("btnActionBill").click();
+	}
+}
+
+function infoBill(idBill) {
+	document.getElementById('idBill').value = idBill;
+	document.getElementById('typeActionBill').value = "info";
+	document.getElementById('action-result').innerHTML="";
+	document.getElementById("btnActionBill").click();
+}
+
+function deleteBill(idBill){
+	document.getElementById('btnpopupConfirm').click();
+	document.getElementById('btnConfirm').onclick = function() {
+		document.getElementById('idBill').value = idBill;
+		document.getElementById('typeActionBill').value = "delete";
+		document.getElementById("btnActionBill").click();
+	}
+}
+
+function ClickBtnBill() {
+	if($("#monthBills").val() != 0 && $("#yearBills").val() == 0){
+		document.getElementById('btnConfirm').style="display: none";
+		document.getElementById('message-confirm').innerHTML="Please select the number of years !";
+		document.getElementById('btnConfirmNo').innerHTML="Close";
+		document.getElementById('btnpopupConfirm').click();
+		$("#monthBills").val(0);
+		return;
+	}
+	document.getElementById("btnSubmitBill").click();
+}
+
+function funcAllBills(){
+	$("#statusBills").val('-1');
+	$("#monthBills").val('0');
+	$("#yearBills").val('0');
+	ClickBtnBill();
 }
