@@ -68,7 +68,7 @@
                 <div class="navbar">
                     <div class="logo">
                         <a href="home.php">
-                            <img src="..\image\logo420.png" width="380px">
+                            <img src="..\image\logo420.png" width="390px">
                         </a>
                     </div>
 
@@ -157,7 +157,7 @@
                             <li id="admin" style="display:none;"><a title="Admin" href="adminPage.html"
                                     onclick="gotoAdmin()"><i class="fas fa-users-cog"></i></a></li>
                             <li id="logOut" style="display:none;"><a title="log out" id="log_out"
-                                    onclick="logout()"></a></li>
+                                    onclick="log()"></a></li>
                         </ul>
                     </nav>
                     <span onclick="menutoggle()" class="menu-icon">&#9776</span>
@@ -190,19 +190,18 @@
                                 <form id="login">
                                     <input type="text" placeholder="User name" id="user_name">
                                     <input type="password" placeholder="Password" id="password">
-                                    <a class="btn" onclick="getInfo()">Log in</a>
+                                    <a class="btn" onclick="loginPHP()">Log in</a>
                                     <a onclick="forgotPW()" style="cursor: pointer;">Forgot password |</a>
                                     <a onclick="close_login_reg_form()" style="cursor: pointer;">| Cancel</a>
                                 </form>
 
                                 <form id="register">
-                                    <input type="text" placeholder="User name" id="user_name1">
-                                    <input type="email" placeholder="Email" id="email">
-                                    <input type="password" placeholder="Password" id="password1">
-                                    <input type="password" placeholder="Repeat password" id="password2">
-                                    <input type="text" placeholder="Phone number" id="phoneNumber">
-                                    <input type="text" placeholder="Address" id="address">
-                                    <a class="btn" onclick="getInfo1()">Register</a>
+                                    <input type="text" placeholder="Full name" id="user_name1" pattern="^[a-zA-ZàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ ]{2,30}(?: [a-zA-ZàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ ]+){1,2}$" required="required" autofocus required title="Full name only contains normal character">
+                                    <input type="email" placeholder="Email" id="email" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required="required" autofocus required title="Email must have character '@', '.', normal ones">
+                                    <input type="password" placeholder="Password" id="password1" autofocus required title="Password must have lower, upper character, number, special characters, the length at least 8 chars">
+                                    <input type="text" placeholder="Phone number" id="phoneNumber" pattern="(0[1-9])+([0-9]{8})\b" required="required" autofocus required title="Phone number only contains digits">
+                                    <input type="text" placeholder="Address" id="address" pattern="^[a-zA-Z0-9/\,àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ ](?: [a-zA-Z0-9/\,àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ ]+){1,2}$" required="required">
+                                    <a class="btn" onclick="registerPHP()">Register</a>
                                     <a onclick="close_login_reg_form()" style="cursor: pointer;">Cancel</a>
                                 </form>
                             </div>
@@ -374,6 +373,7 @@
         </div>
     </div>
     <script src="../js/scripts.js"></script>
+    <script src="../login/login.js"></script>
 </body>
 
 </html>
