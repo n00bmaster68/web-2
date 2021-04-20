@@ -22,7 +22,7 @@
                 $condition2 = " <> ";
             }
             $query ="SELECT * FROM hoadon WHERE month(NGAYXUAT)".$condition1.$month." AND year(NGAYXUAT)".$condition2.$year;
-            if ($status >=0 ){
+            if ($status >=-1 ){
                 $query = $query." AND TinhTrang = ".$status;
             }
             $result = mysqli_query($conn,$query);

@@ -35,10 +35,16 @@
     } else {
         ['findDetailBillByIdBill' => $bill] = require '../Entities/bill.php';
         $data = $bill($conn,$idBill);
-        //day du lieu vo code html de trinh bay (du lieu bao gom chitiethd,ten va gia sp) $data['MaHD'] va $data['chitiethd'][$i]['Ten'] 
-        //$data['chitiethd'][$i]['GiaBan'] $data['chitiethd'][$i]['MaSP']
-        // $res = $res."mahd = ".$data['MaHD']."<br>makh = ".$data['MaKH']."<br>ngayxuat = ".$data['NGAYXUAT']."<br>tinhtrang = ".$data['TinhTrang']."<br>thanhtien = ".$data['ThanhTien'];
-        print_r($data);
+        $res = $res."<table class=\"table table-striped\"><thead><tr><th>Name</th><th>Type name</th><th>Price</th><th>Amount</th><th>Total price</th></tr></thead><tbody>";
+        for ($i=0; $i <count($data) ; $i++) { 
+            $price = intval($data[$i]['GiaSP']);
+            $price1 =  number_format($price, 0, '', '.');
+            $totalPrice = intval($data[$i]['TongTien']);
+            $totalPrice1 =  number_format($totalPrice, 0, '', '.');
+            $res = $res."<tr><td>".$data[$i]['Ten']."</td><td>".$data[$i]['TenLoai']."</td><td>".$price1." VND</td><td>".$data[$i]['SoLuong']
+            ."</td><td>".$totalPrice1." VND</td></tr>";
+        }
+        $res = $res."</tbody></table>";
     }
     require_once('../utils/close_db.php');
     echo $res;

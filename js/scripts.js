@@ -9,19 +9,19 @@ var num_shirt;
 var num_pant;
 var num;
 var mybutton = document.getElementById("BtnTop");
-window.onscroll = function() {scrollFunction()};
+// window.onscroll = function() {scrollFunction()};
 	
-function scrollFunction() 
-{
-	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)
-	{
-		mybutton.style.display = "block";
-	} 
-	else 
-	{
-		mybutton.style.display = "none";
-	}
-}
+// function scrollFunction() 
+// {
+// 	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)
+// 	{
+// 		mybutton.style.display = "block";
+// 	} 
+// 	else 
+// 	{
+// 		mybutton.style.display = "none";
+// 	}
+// }
 
 function topFunction() 
 {
@@ -29,8 +29,8 @@ function topFunction()
 		document.documentElement.scrollTop = 0;
 }
 
-var MenuItems = document.getElementById("MenuItems");
-MenuItems.style.maxHeight = "0px";
+// var MenuItems = document.getElementById("MenuItems");
+// MenuItems.style.maxHeight = "0px";
 
 function menutoggle()
 {
@@ -1049,6 +1049,7 @@ function editBill(idBill, statusBill) {
 function infoBill(idBill) {
 	document.getElementById('idBill').value = idBill;
 	document.getElementById('typeActionBill').value = "info";
+	document.getElementById('action-result').innerHTML="";
 	document.getElementById("btnActionBill").click();
 }
 
@@ -1067,7 +1068,7 @@ function ClickBtnBill() {
 		document.getElementById('message-confirm').innerHTML="Please select the number of years !";
 		document.getElementById('btnConfirmNo').innerHTML="Close";
 		document.getElementById('btnpopupConfirm').click();
-		// alert("vui long chon so nam can xem !");
+		$("#monthBills").val(0);
 		return;
 	}
 	document.getElementById("btnSubmitBill").click();
