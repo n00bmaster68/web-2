@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2021 at 08:12 AM
+-- Generation Time: Apr 21, 2021 at 05:06 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.15
 
@@ -84,8 +84,6 @@ INSERT INTO `hoadon` (`MaHD`, `NGAYXUAT`, `MaKH`, `TinhTrang`, `ThanhTien`) VALU
 CREATE TABLE `khachhang` (
   `MaKH` int(11) NOT NULL,
   `Ten` varchar(50) NOT NULL,
-  `NgaySinh` datetime NOT NULL,
-  `GioiTinh` varchar(10) NOT NULL,
   `DiaChi` varchar(50) NOT NULL,
   `Email` varchar(50) NOT NULL,
   `SDT` varchar(50) NOT NULL,
@@ -97,8 +95,9 @@ CREATE TABLE `khachhang` (
 -- Dumping data for table `khachhang`
 --
 
-INSERT INTO `khachhang` (`MaKH`, `Ten`, `NgaySinh`, `GioiTinh`, `DiaChi`, `Email`, `SDT`, `MatKhau`, `TinhTrang`) VALUES
-(1, 'Nguyễn Lê Huy Thắng', '2001-12-12 00:00:00', 'Nam', '456/17 Tan Phú', 'nguyenlehuythang@gmail.com', '0901407894', '123456789', 1);
+INSERT INTO `khachhang` (`MaKH`, `Ten`, `DiaChi`, `Email`, `SDT`, `MatKhau`, `TinhTrang`) VALUES
+(1, 'Nguyễn Lê Huy Thắng', '456/17 Tan Phú', 'nguyenlehuythang@gmail.com', '0901407894', '25d55ad283aa400af464c76d713c07ad', 1),
+(1618887096, 'Trần Gia Thuân', 'somewhere in heaven', 'mala@gmail.com', '', '25d55ad283aa400af464c76d713c07ad', 1)
 
 -- --------------------------------------------------------
 
@@ -116,8 +115,8 @@ CREATE TABLE `loai` (
 --
 
 INSERT INTO `loai` (`MaLo`, `TenLoai`) VALUES
-(1, 'Áo'),
-(2, 'Quần');
+(1, 'T-Shirt'),
+(2, 'Pant');
 
 -- --------------------------------------------------------
 
@@ -313,7 +312,7 @@ ALTER TABLE `hoadon`
 -- AUTO_INCREMENT for table `khachhang`
 --
 ALTER TABLE `khachhang`
-  MODIFY `MaKH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `MaKH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1618936333;
 
 --
 -- AUTO_INCREMENT for table `loai`
