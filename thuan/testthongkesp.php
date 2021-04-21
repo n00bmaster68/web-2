@@ -19,7 +19,7 @@
 </head>
 <body>
 <div class="row-chart">
-    <div class="col-6 chart">
+    <div class="col-6 chart" id="result-statistic-product">
         <canvas id="myChart2" width="500" height="400"></canvas>
     </div>
 </div>
@@ -28,6 +28,10 @@
     ['statisticProducts' => $statistic] = require '../Entities/detailbill.php';
     $data = $statistic($conn,4,2021,12,0);
     require_once('../utils/close_db.php');
+    if(count($data) == 0){
+        echo "<script>document.getElementById('result-statistic-product').innerHTML='No best selling products found !';</script>";
+        return;
+    }
     $dataName = "['";
     $dataNumber = "[";
     for ($i=0; $i <count($data) ; $i++) {
@@ -36,7 +40,7 @@
     }
     $dataName = substr($dataName, 0, -2)."];";
     $dataNumber = substr($dataNumber, 0, -1)."];";
-    $res = "<script>
+    $res = "<>
     let labels2 = ".$dataName."
     let data2 = ".$dataNumber."
     let colors2 = [];
@@ -63,7 +67,7 @@
             }
         }
     });
-    </script>";
+    </>";
     echo $res;
 ?>
 </body>

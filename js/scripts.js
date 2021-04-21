@@ -1089,7 +1089,7 @@ function ClickBtnBill() {
 }
 
 function funcAllBills(){
-	$("#statusBills").val('-1');
+	$("#statusBills").val('-2');
 	$("#monthBills").val('0');
 	$("#yearBills").val('0');
 	ClickBtnBill();
