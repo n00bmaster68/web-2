@@ -107,11 +107,8 @@ class login
         {
             $this->json['thongtin']['name'] = $row['Ten'];
             $this->json['thongtin']['email'] = $row['Email'];
-            // $this->json['ngaySinh'] = $row['NgaySinh'];
             $this->json['thongtin']['diaChi'] = $row['DiaChi'];
-            $this->json['thongtin']['gioiTinh'] = $row['GioiTinh'];
             $this->json['thongtin']['sdt'] = $row['SDT'];
-            // $this->json['hinhdaidien'] = $row['HINHDAIDIEN'];
         }
     }
     function checkForm()
@@ -201,7 +198,7 @@ class login
             if ($this->result == null)
             {
                 $pass = md5($_POST['pass']);
-                $this->query = "INSERT INTO khachhang (khachhang.makh,khachhang.ten, khachhang.matkhau, khachhang.email,khachhang.sdt,khachhang.tinhtrang,diachi) VALUES ('" . time() . "','" . $_POST['name'] . "', '" . $pass . "', '" . $_POST['email'] . "','" . $_POST['sdt'] . "','1','".$_POST['diachi']."')";
+                $this->query = "INSERT INTO khachhang (khachhang.ten, khachhang.matkhau, khachhang.email,khachhang.sdt,khachhang.tinhtrang, khachhang.diachi) VALUES ('" . $_POST['name'] . "', '" . $pass . "', '" . $_POST['email'] . "','" . $_POST['sdt'] . "','1','".$_POST['diachi']."')";
                 // echo $this->query;
                 $this->excuteQuery(1);
             }
