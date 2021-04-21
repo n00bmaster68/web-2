@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2021 at 05:06 AM
+-- Generation Time: Apr 21, 2021 at 12:13 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.15
 
@@ -51,8 +51,7 @@ CREATE TABLE `chucvu` (
 
 INSERT INTO `chucvu` (`MaCH`, `TenCh`) VALUES
 (1, 'Manager'),
-(2, 'Seller'),
-(3, 'Warehouse staff');
+(2, 'Seller');
 
 -- --------------------------------------------------------
 
@@ -67,13 +66,6 @@ CREATE TABLE `hoadon` (
   `TinhTrang` tinyint(1) NOT NULL,
   `ThanhTien` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `hoadon`
---
-
-INSERT INTO `hoadon` (`MaHD`, `NGAYXUAT`, `MaKH`, `TinhTrang`, `ThanhTien`) VALUES
-(1, '2021-09-03 00:00:00', 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -96,8 +88,7 @@ CREATE TABLE `khachhang` (
 --
 
 INSERT INTO `khachhang` (`MaKH`, `Ten`, `DiaChi`, `Email`, `SDT`, `MatKhau`, `TinhTrang`) VALUES
-(1, 'Nguyễn Lê Huy Thắng', '456/17 Tan Phú', 'nguyenlehuythang@gmail.com', '0901407894', '25d55ad283aa400af464c76d713c07ad', 1),
-(1618887096, 'Trần Gia Thuân', 'somewhere in heaven', 'mala@gmail.com', '', '25d55ad283aa400af464c76d713c07ad', 1)
+(0, 'Nguyễn Lê Huy Thắng', 'Tân Phú', 'nguyenlehuythang@gmail.com', '0901407894', 'd9c4921301eea60043a5ac687518b707', 1);
 
 -- --------------------------------------------------------
 
@@ -127,11 +118,8 @@ INSERT INTO `loai` (`MaLo`, `TenLoai`) VALUES
 CREATE TABLE `nhanvien` (
   `MaNV` int(11) NOT NULL,
   `Ten` varchar(50) NOT NULL,
-  `NgaySinh` datetime NOT NULL,
-  `GioiTinh` varchar(10) NOT NULL,
   `MaCh` int(11) NOT NULL,
-  `DiaChiTT` varchar(50) NOT NULL,
-  `DiaChiTaT` varchar(50) NOT NULL,
+  `DiaChi` varchar(50) NOT NULL,
   `Password` text NOT NULL,
   `TinhTrang` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -289,30 +277,11 @@ ALTER TABLE `nhanvien`
 --
 ALTER TABLE `sanpham`
   ADD PRIMARY KEY (`MaSP`),
-  ADD UNIQUE KEY `Hinh` (`Hinh`) USING HASH,
   ADD KEY `MaLoai` (`MaLoai`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `chucvu`
---
-ALTER TABLE `chucvu`
-  MODIFY `MaCH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `hoadon`
---
-ALTER TABLE `hoadon`
-  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `khachhang`
---
-ALTER TABLE `khachhang`
-  MODIFY `MaKH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1618936333;
 
 --
 -- AUTO_INCREMENT for table `loai`
