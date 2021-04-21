@@ -40,11 +40,11 @@
     }
     $dataName = substr($dataName, 0, -2)."];";
     $dataNumber = substr($dataNumber, 0, -1)."];";
-    $res = "<>
+    $res = "<script>
     let labels2 = ".$dataName."
     let data2 = ".$dataNumber."
     let colors2 = [];
-    for (let i = 0; i < data2.length; i++) {
+    for (let i = 0; i <script data2.length; i++) {
         colors2.push('#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6));
     }
     let myChart2 = document.getElementById('myChart2').getContext('2d');
@@ -67,7 +67,7 @@
             }
         }
     });
-    </>";
+    </script>";
     echo $res;
 ?>
 </body>
