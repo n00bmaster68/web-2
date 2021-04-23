@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2021 at 12:13 PM
+-- Generation Time: Apr 23, 2021 at 05:09 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.15
 
@@ -88,7 +88,9 @@ CREATE TABLE `khachhang` (
 --
 
 INSERT INTO `khachhang` (`MaKH`, `Ten`, `DiaChi`, `Email`, `SDT`, `MatKhau`, `TinhTrang`) VALUES
-(0, 'Nguyễn Lê Huy Thắng', 'Tân Phú', 'nguyenlehuythang@gmail.com', '0901407894', 'd9c4921301eea60043a5ac687518b707', 1);
+(1, 'Nguyen Le Huy Thang', '456/17 pth', 'nguyenlehuythang@gmail.com', '0901407894', '25d55ad283aa400af464c76d713c07ad', 1),
+(2, 'Nguyen Le Huy Thang', '456/17 pth', 'nguyenng@gmail.com', '0901407894', '25d55ad283aa400af464c76d713c07ad', 1),
+(4, 'Sang Vũ Trụ', 'Tân Phú', 'sang@gmail.com', '0901407894', '99f7dce285bb3f9b3c4517afc3038cc5', 1);
 
 -- --------------------------------------------------------
 
@@ -250,14 +252,14 @@ ALTER TABLE `chucvu`
 --
 ALTER TABLE `hoadon`
   ADD PRIMARY KEY (`MaHD`),
-  ADD KEY `MaKH` (`MaKH`);
+  ADD UNIQUE KEY `MaKH` (`MaKH`);
 
 --
 -- Indexes for table `khachhang`
 --
 ALTER TABLE `khachhang`
   ADD PRIMARY KEY (`MaKH`),
-  ADD UNIQUE KEY `Email` (`Email`,`SDT`);
+  ADD UNIQUE KEY `Email` (`Email`);
 
 --
 -- Indexes for table `loai`
@@ -282,6 +284,24 @@ ALTER TABLE `sanpham`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `chucvu`
+--
+ALTER TABLE `chucvu`
+  MODIFY `MaCH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `hoadon`
+--
+ALTER TABLE `hoadon`
+  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `khachhang`
+--
+ALTER TABLE `khachhang`
+  MODIFY `MaKH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `loai`
@@ -322,7 +342,7 @@ ALTER TABLE `hoadon`
 -- Constraints for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  ADD CONSTRAINT `nhanvien_ibfk_1` FOREIGN KEY (`MaCh`) REFERENCES `chucvu` (`MaCH`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `nhanvien_ibfk_1` FOREIGN KEY (`MaCh`) REFERENCES `chucvu` (`MaCH`);
 
 --
 -- Constraints for table `sanpham`

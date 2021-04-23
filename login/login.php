@@ -198,7 +198,7 @@ class login
             if ($this->result == null)
             {
                 $pass = md5($_POST['pass']);
-                $this->query = "INSERT INTO khachhang (khachhang.ten, khachhang.matkhau, khachhang.email,khachhang.sdt,khachhang.tinhtrang, khachhang.diachi) VALUES ('" . $_POST['name'] . "', '" . $pass . "', '" . $_POST['email'] . "','" . $_POST['sdt'] . "','1','".$_POST['diachi']."')";
+                $this->query = "INSERT INTO khachhang (ten, matkhau, email, sdt, tinhtrang, diachi) VALUES ('".$_POST['name']."', '".$pass."', '".$_POST['email']."','".$_POST['sdt']."',1,'".$_POST['diachi']."')";
                 // echo $this->query;
                 $this->excuteQuery(1);
             }
