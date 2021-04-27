@@ -1,3 +1,5 @@
+document.getElementById('container-data-bill').style.display= "none";
+
 function getProductName(id)
 {
 	var stored_products = JSON.parse(localStorage.getItem('product_info'));
@@ -75,6 +77,8 @@ function showDetail(id)
 
 function showBill()
 {
+	document.getElementById('container-data-bill').style.display= "block";
+	document.getElementById('result-statistic-product').innerHTML='';
 	if (localStorage['save_order'] != null)
 	{
 		var save_order = JSON.parse(localStorage.getItem('save_order'));
@@ -99,70 +103,88 @@ function closeDetail()
 	document.getElementById('EditProductForm').style.top = "-300%";
 }
 
-function createPage(product_info)
-{
-	for (var i = 0; i < product_info.length - 1; i++)
-		for (var j = i + 1; j < product_info.length ; j++)
-			if (product_info[j].quantity < product_info[i].quantity)
-			{
-				var temp = product_info[j];
-				product_info[j] = product_info[i];
-				product_info[i] = temp;
-			}
-	var NumPage = '';
-	for (var i = 0; i < getNum(product_info); i++)
-		NumPage += '<li><button>' + (i + 1) + '</button></li>';
+// function createPage(product_info)
+// {
+// 	for (var i = 0; i < product_info.length - 1; i++)
+// 		for (var j = i + 1; j < product_info.length ; j++)
+// 			if (product_info[j].quantity < product_info[i].quantity)
+// 			{
+// 				var temp = product_info[j];
+// 				product_info[j] = product_info[i];
+// 				product_info[i] = temp;
+// 			}
+// 	var NumPage = '';
+// 	for (var i = 0; i < getNum(product_info); i++)
+// 		NumPage += '<li><button>' + (i + 1) + '</button></li>';
 
-	var saleReport = [];
-	for (var i = 0; i < getNum(product_info); i++)
-	{
-		var temp = '', c = 0, products = '';
-		for (var j = 12*i; j < 12*i + 12; j++)
-		{
-			if (product_info[j] != null)
-			{
-				temp += '<div class="col-4"' + 'id="' + product_info[j].id + '">' + '<img src="' + product_info[j].img+ '"><h4 style="font-size: 20px; margin-top:2%">' + product_info[j].name + '</h4><div class="rating"><span style="color: black">&#9733</span><span style="color: black">&#9733</span><span style="color: black">&#9733</span><span style="color: black">&#9733</span><span style="color: black">&#9733</span></div><p>Price: ' + product_info[j].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '</p><p style="margin-top: -15px">Sold: ' + (100 - product_info[j].quantity) + '</p><p style="margin-top: -15px">In stock: ' + product_info[j].quantity + '</p>' + '</div>';
-				c += 1;
-				if (c == 4 || j == product_info.length - 1)
-				{
-					temp = '<div class="row2">' + temp + '</div>';
-					products += temp;
-					temp = "";
-					c = 0;
-				}
-			}
-		}
-		products = '<h2 class="title">' + 'SALE REPORT/' + (i + 1) + '</h2>' + products;
-		saleReport.push(products);
+// 	var saleReport = [];
+// 	for (var i = 0; i < getNum(product_info); i++)
+// 	{
+// 		var temp = '', c = 0, products = '';
+// 		for (var j = 12*i; j < 12*i + 12; j++)
+// 		{
+// 			if (product_info[j] != null)
+// 			{
+// 				temp += '<div class="col-4"' + 'id="' + product_info[j].id + '">' + '<img src="' + product_info[j].img+ '"><h4 style="font-size: 20px; margin-top:2%">' + product_info[j].name + '</h4><div class="rating"><span style="color: black">&#9733</span><span style="color: black">&#9733</span><span style="color: black">&#9733</span><span style="color: black">&#9733</span><span style="color: black">&#9733</span></div><p>Price: ' + product_info[j].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '</p><p style="margin-top: -15px">Sold: ' + (100 - product_info[j].quantity) + '</p><p style="margin-top: -15px">In stock: ' + product_info[j].quantity + '</p>' + '</div>';
+// 				c += 1;
+// 				if (c == 4 || j == product_info.length - 1)
+// 				{
+// 					temp = '<div class="row2">' + temp + '</div>';
+// 					products += temp;
+// 					temp = "";
+// 					c = 0;
+// 				}
+// 			}
+// 		}
+// 		products = '<h2 class="title">' + 'SALE REPORT/' + (i + 1) + '</h2>' + products;
+// 		saleReport.push(products);
+// 	}
+// 	return saleReport;
+// }
+
+// function changePage(id)
+// {
+// 	var product_info = JSON.parse(localStorage.getItem('product_info'));
+// 	var saleReport = createPage(product_info);
+// 	var temp = '';
+// 	for (var i = 0; i < getNum(product_info); i++)
+// 		temp += '<li><button id="' + i + '" onclick="changePage(this.id)">' + (i + 1) + '</button></li>';
+// 	temp = '<ul class = "page-num" id = "page-num">' + temp + '</ul>';
+// 	var result = saleReport[id] + temp;
+
+// 	if (parseInt(id) == 0)
+// 	{
+// 		var d = new Date();
+// 		var m = d.getMonth() + 1;
+// 		result = '<canvas id="myChart"></canvas>' + '<div id="monthOfChart"><p style="display: inline-block; font-size: 32px;">Best seller in </p><input class="input" id="month" placeholder="Month" style="margin-left: 5px;width: 73px;margin-bottom: 30px; text-align: center; padding-left: 0" value="' + m + '" onkeyup="reDrawChart()"></div>' + result;
+// 		document.getElementById("center").innerHTML = result;
+// 		drawChart();
+// 	}
+// 	else{
+// 		document.getElementById("center").innerHTML = result;
+// 	}
+// }
+
+
+// function saleReport(){changePage(0); closeSideBar(); closeDetail();}
+
+function changeYears(){
+	var start = 2015;
+	var end = new Date().getFullYear();
+	var options = "<option selected value='0'>>--Select Year--<</option>";
+	for (var year = start; year <= end; year++) {
+		options += "<option value='" + year + "'>" + year + "</option>";
 	}
-	return saleReport;
+	document.getElementById("yearBills2").innerHTML = options;
 }
 
-function changePage(id)
-{
-	var product_info = JSON.parse(localStorage.getItem('product_info'));
-	var saleReport = createPage(product_info);
-	var temp = '';
-	for (var i = 0; i < getNum(product_info); i++)
-		temp += '<li><button id="' + i + '" onclick="changePage(this.id)">' + (i + 1) + '</button></li>';
-	temp = '<ul class = "page-num" id = "page-num">' + temp + '</ul>';
-	var result = saleReport[id] + temp;
-
-	if (parseInt(id) == 0)
-	{
-		var d = new Date();
-		var m = d.getMonth() + 1;
-		result = '<canvas id="myChart"></canvas>' + '<div id="monthOfChart"><p style="display: inline-block; font-size: 32px;">Best seller in </p><input class="input" id="month" placeholder="Month" style="margin-left: 5px;width: 73px;margin-bottom: 30px; text-align: center; padding-left: 0" value="' + m + '" onkeyup="reDrawChart()"></div>' + result;
-		document.getElementById("center").innerHTML = result;
-		drawChart();
-	}
-	else{
-		document.getElementById("center").innerHTML = result;
-	}
+function statisticBestProd(){
+	document.getElementById('container-data-bill').style.display="none";
+    document.getElementById('chart-product').style.display="block";
+    document.getElementById('center').innerHTML="<h2 class=\"title\">Best-selling product statistics over time</h2>";
+	changeYears();
+	closeSideBar();
 }
-
-
-function saleReport(){changePage(0); closeSideBar(); closeDetail();}
 
 function deleteProduct(id)
 {
@@ -323,96 +345,6 @@ function getProductName(id)
 	for (var i = 0; i < stored_products.length; i++)
 		if (stored_products[i].id == id)
 			return stored_products[i].name;
-}
-
-function drawChart(flag = true)
-{
-	if (localStorage["save_order"] != null)
-	{
-		document.getElementById("monthOfChart").style.marginTop = "-25px";
-		var bestSeller = getTop10(flag);
-		console.log(bestSeller);
-		if (bestSeller.length == 0)
-		{
-			document.getElementById("myChart").style.display = "none";
-			document.getElementById("monthOfChart").style.marginTop = "25px";
-		}
-		else
-			document.getElementById("myChart").style.display = "block";
-	    var label = [];
-	    var sale = []
-	    var length;
-	    if (bestSeller.length > 10)
-	    	length = 10;
-	    else 
-	    	length = bestSeller.length;
-	    for (var i = 0; i < length; i++)
-	    {
-	      label.push(getProductName(bestSeller[i].id));
-	      sale.push(bestSeller[i].Sold);
-	    }
-
-	    let myChart = document.getElementById('myChart').getContext('2d');
-
-	    // Global Options
-	    Chart.defaults.global.defaultFontFamily = 'Lato';
-	    Chart.defaults.global.defaultFontSize = 10;
-	    Chart.defaults.global.defaultFontColor = '#777';
-
-
-	    let massPopChart = new Chart(myChart, {
-	      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-	      data:{
-	        labels:label,
-	        datasets:[{
-	          label:'SALES',
-	          data: sale,
-	          //backgroundColor:'green',
-	          backgroundColor: '#ffc800',
-	          borderWidth:1,
-	          borderColor:'#777',
-	          hoverBorderWidth:3,
-	          hoverBorderColor:'#000'
-	        }]
-	      },
-	      options:{
-	        title:{
-	          display:true,
-	          text:'TOP 10 BEST SELLER THIS MONTH',
-	          fontSize:25
-	        },
-	        legend:{
-	          display:true,
-	          position:'right',
-	          labels:{
-	            fontColor:'#000'
-	          }
-	        },
-	        layout:{
-	          padding:{
-	            left:50,
-	            right:0,
-	            bottom:0,
-	            top:0
-	          }
-	        },
-	        tooltips:{
-	          enabled:true
-	        }
-	      }
-	    });
-	}
-	else
-	{
-		document.getElementById("myChart").style.display = "none";
-		document.getElementById("monthOfChart").style.marginTop = "25px";
-	}
-}
-
-function reDrawChart()
-{
-	drawChart(false);
-	console.log("runnnnnn");
 }
 
 function openDelForm()
@@ -919,6 +851,7 @@ function getInfo2()
 
 function loadPage()
 {
+	document.getElementById('chart-product').style.display="none";
 	showBill();
 	var admin = localStorage.getItem('current_admin');
 	document.getElementById("admin").innerHTML = admin + "<span>Co-founder and owner</span>"

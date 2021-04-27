@@ -1088,6 +1088,18 @@ function ClickBtnBill() {
 	document.getElementById("btnSubmitBill").click();
 }
 
+function ClickBtnBill2() {
+	if($("#monthBills2").val() != 0 && $("#yearBills2").val() == 0){
+		document.getElementById('btnConfirm').style="display: none";
+		document.getElementById('message-confirm').innerHTML="Please select the number of years !";
+		document.getElementById('btnConfirmNo').innerHTML="Close";
+		document.getElementById('btnpopupConfirm').click();
+		$("#monthBills2").val(0);
+		return;
+	}
+	document.getElementById("btnSubmitBill2").click();
+}
+
 function funcAllBills(){
 	$("#statusBills").val('-2');
 	$("#monthBills").val('0');
