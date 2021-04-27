@@ -21,14 +21,14 @@
     }
     $dataName = substr($dataName, 0, -2)."]; ";
     $dataNumber = substr($dataNumber, 0, -1)."]; ";
-    $res = "<script> let labels2 = ".$dataName."
-    let data2 = ".$dataNumber."
-    let colors2 = []; 
+    $res = "<script> var labels2 = ".$dataName."
+    var data2 = ".$dataNumber."
+    var colors2 = []; 
     for (let i = 0; i < data2.length; i++) {
         colors2.push('#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6));
     } 
-    let myChart2 = document.getElementById('myChart2').getContext('2d'); 
-    let chart2 = new Chart(myChart2, {
+    var myChart2 = document.getElementById('myChart2').getContext('2d'); 
+    var chart2 = new Chart(myChart2, {
         type: 'bar',
         data: {
             labels: labels2,

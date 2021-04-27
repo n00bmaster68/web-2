@@ -305,6 +305,11 @@
 					year: $("#yearBills2").val()
 				}, function(data) {
 					$("#result-chart").html(data);
+                    delete labels2;
+                    delete data2;
+                    delete colors2;
+                    delete myChart2;
+                    delete chart2;
 				});
 			});
         });
