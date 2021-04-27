@@ -121,11 +121,7 @@ function createPage(product_info)
 		{
 			if (product_info[j] != null)
 			{
-<<<<<<< HEAD
 				temp += '<div class="col-4"' + 'id="' + product_info[j].id + '">' + '<img src="' + product_info[j].img+ '"><h4 style="font-size: 20px; margin-top:2%">' + product_info[j].name + '</h4><div class="rating"><span style="color: black">&#9733</span><span style="color: black">&#9733</span><span style="color: black">&#9733</span><span style="color: black">&#9733</span><span style="color: black">&#9733</span></div><p>Price: ' + product_info[j].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '</p><p style="margin-top: -15px">Sold: ' + (100 - product_info[j].quantity) + '</p><p style="margin-top: -15px">In stock: ' + product_info[j].quantity + '</p>' + '</div>';
-=======
-				temp += '<div class="col4"' + 'id="' + product_info[j].id + '">' + '<img src="' + product_info[j].img+ '"><h4 style="font-size: 20px; margin-top:2%">' + product_info[j].name + '</h4><div class="rating"><span style="color: black">&#9733</span><span style="color: black">&#9733</span><span style="color: black">&#9733</span><span style="color: black">&#9733</span><span style="color: black">&#9733</span></div><p>Price: ' + product_info[j].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '</p><p style="margin-top: -15px">Sold: ' + (100 - product_info[j].quantity) + '</p><p style="margin-top: -15px">In stock: ' + product_info[j].quantity + '</p>' + '</div>';
->>>>>>> 065b4a2... tai thang Thuan
 				c += 1;
 				if (c == 4 || j == product_info.length - 1)
 				{
@@ -506,11 +502,7 @@ function search2()
 			if (stored_accounts[j].name.toLowerCase().indexOf(input) != -1)
 			{
 				console.log("run12");
-<<<<<<< HEAD
 				temp += '<div class="col-4" style="border: 3px solid #ff8c00"><h4 style="font-size: 20px; margin-top:2%">' + stored_accounts[j].name + '</h4><p style="margin-top: -21px; margin-bottom: -10px">Phone number: ' + stored_accounts[j].phoneNumber + '</p><p style="margin-bottom: -10px">Address: ' + stored_accounts[j].address + '</p><p style="margin-bottom: -10px">Email: ' + stored_accounts[j].email + '</p><p id="AccState' + stored_accounts[j].name + '">State: ' + isBlocked(stored_accounts[j].isBlocked) + '</p>'+ getButton(stored_accounts[j]) + '<button id="' + stored_accounts[j].name + '"class="btn2" onclick="deleteAcc(this.id)">Delete</button>' + '<button id="' + stored_accounts[j].name + '"class="btn2" onclick="openForm3(this.id)">Edit</button>' + resetButton(stored_accounts[j]) + '</div>';
-=======
-				temp += '<div class="col4" style="border: 3px solid #ff8c00"><h4 style="font-size: 20px; margin-top:2%">' + stored_accounts[j].name + '</h4><p style="margin-top: -21px; margin-bottom: -10px">Phone number: ' + stored_accounts[j].phoneNumber + '</p><p style="margin-bottom: -10px">Address: ' + stored_accounts[j].address + '</p><p style="margin-bottom: -10px">Email: ' + stored_accounts[j].email + '</p><p id="AccState' + stored_accounts[j].name + '">State: ' + isBlocked(stored_accounts[j].isBlocked) + '</p>'+ getButton(stored_accounts[j]) + '<button id="' + stored_accounts[j].name + '"class="btn2" onclick="deleteAcc(this.id)">Delete</button>' + '<button id="' + stored_accounts[j].name + '"class="btn2" onclick="openForm3(this.id)">Edit</button>' + resetButton(stored_accounts[j]) + '</div>';
->>>>>>> 065b4a2... tai thang Thuan
 				c += 1;
 				if (c == 4 || j == stored_accounts.length - 1)
 				{
@@ -541,11 +533,7 @@ function openManageAccForm()
 	var temp = '', c = 0, result = '';
 	for (var j = 0; j < stored_accounts.length; j++)
 	{
-<<<<<<< HEAD
 		temp += '<div class="col-4" style="border: 3px solid #ff8c00"><h4 style="font-size: 20px; margin-top:2%">' + stored_accounts[j].name + '</h4><p style="margin-top: -21px; margin-bottom: -10px">Phone number: ' + stored_accounts[j].phoneNumber + '</p><p style="margin-bottom: -10px">Address: ' + stored_accounts[j].address + '</p><p style="margin-bottom: -10px">Email: ' + stored_accounts[j].email + '</p><p id="AccState' + stored_accounts[j].name + '">State: ' + isBlocked(stored_accounts[j].isBlocked) + '</p>'+ getButton(stored_accounts[j]) + '<button id="' + stored_accounts[j].name + '"class="btn2" onclick="deleteAcc(this.id)">Delete</button>' + '<button id="' + stored_accounts[j].name + '"class="btn2" onclick="openForm3(this.id)">Edit</button>' + resetButton(stored_accounts[j]) + '</div>';
-=======
-		temp += '<div class="col4" style="border: 3px solid #ff8c00"><h4 style="font-size: 20px; margin-top:2%">' + stored_accounts[j].name + '</h4><p style="margin-top: -21px; margin-bottom: -10px">Phone number: ' + stored_accounts[j].phoneNumber + '</p><p style="margin-bottom: -10px">Address: ' + stored_accounts[j].address + '</p><p style="margin-bottom: -10px">Email: ' + stored_accounts[j].email + '</p><p id="AccState' + stored_accounts[j].name + '">State: ' + isBlocked(stored_accounts[j].isBlocked) + '</p>'+ getButton(stored_accounts[j]) + '<button id="' + stored_accounts[j].name + '"class="btn2" onclick="deleteAcc(this.id)">Delete</button>' + '<button id="' + stored_accounts[j].name + '"class="btn2" onclick="openForm3(this.id)">Edit</button>' + resetButton(stored_accounts[j]) + '</div>';
->>>>>>> 065b4a2... tai thang Thuan
 		c += 1;
 		if (c == 4 || j == stored_accounts.length - 1)
 		{
@@ -588,11 +576,7 @@ function searchById()
 			// console.log(j);
 			if (product_info[j].id.toLowerCase().indexOf(input) != -1)
 			{
-<<<<<<< HEAD
 				temp += '<div class="col-4"' + 'id="' + product_info[j].id + '">' + '<img src="' + product_info[j].img+ '"><h4 style="font-size: 20px; margin-top:2%">' + product_info[j].name + '</h4><p style="margin-top: -21px; margin-bottom: -10px">Price: ' + product_info[j].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '</p>' + '<button class="btn" id="' + product_info[j].id + '" onclick="deleteProduct(this.id)">Delete</button><button id="' + product_info[j].id + '"class="btn" onclick="editInfo(this.id)">Edit</button></div>';
-=======
-				temp += '<div class="col4"' + 'id="' + product_info[j].id + '">' + '<img src="' + product_info[j].img+ '"><h4 style="font-size: 20px; margin-top:2%">' + product_info[j].name + '</h4><p style="margin-top: -21px; margin-bottom: -10px">Price: ' + product_info[j].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '</p>' + '<button class="btn" id="' + product_info[j].id + '" onclick="deleteProduct(this.id)">Delete</button><button id="' + product_info[j].id + '"class="btn" onclick="editInfo(this.id)">Edit</button></div>';
->>>>>>> 065b4a2... tai thang Thuan
 				c += 1;
 				if (c == 4 || j == product_info.length - 1)
 				{
@@ -628,11 +612,7 @@ function searchByName()
 			console.log(j);
 			if (product_info[j].name.toLowerCase().indexOf(input) != -1)
 			{
-<<<<<<< HEAD
 				temp += '<div class="col-4"' + 'id="' + product_info[j].id + '">' + '<img src="' + product_info[j].img+ '"><h4 style="font-size: 20px; margin-top:2%">' + product_info[j].name + '</h4><p style="margin-top: -21px; margin-bottom: -10px">Price: ' + product_info[j].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '</p>' + '<button class="btn" id="' + product_info[j].id + '" onclick="deleteProduct(this.id)">Delete</button><button id="' + product_info[j].id + '"class="btn" onclick="editInfo(this.id)">Edit</button></div>';
-=======
-				temp += '<div class="col4"' + 'id="' + product_info[j].id + '">' + '<img src="' + product_info[j].img+ '"><h4 style="font-size: 20px; margin-top:2%">' + product_info[j].name + '</h4><p style="margin-top: -21px; margin-bottom: -10px">Price: ' + product_info[j].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '</p>' + '<button class="btn" id="' + product_info[j].id + '" onclick="deleteProduct(this.id)">Delete</button><button id="' + product_info[j].id + '"class="btn" onclick="editInfo(this.id)">Edit</button></div>';
->>>>>>> 065b4a2... tai thang Thuan
 				c += 1;
 				if (c == 4 || j == product_info.length - 1)
 				{
