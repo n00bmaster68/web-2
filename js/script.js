@@ -195,17 +195,12 @@ function statisticBestProdByType(){
 
 function deleteProduct(id)
 {
-	if (confirm("Confirm to remove this product from store."))
-	{
-		console.log("doooooooooooo");
-		var product_info = JSON.parse(localStorage.getItem('product_info'));
-		for (var i = 0; i < product_info.length; i++)
-			if (product_info[i].id == id)
-			{
-				product_info.splice(i, 1);
-				break;
-			}
-		localStorage.setItem('product_info', JSON.stringify(product_info));
+	document.getElementById('message-confirm').innerHTML="Are you sure you want to delete ?";
+	document.getElementById('btnpopupConfirm').click();
+	document.getElementById('btnConfirm').onclick = function() {
+		document.getElementById('idProd').value=id;
+		document.getElementById('typeActionProd').value="delete";
+		document.getElementById('btnActionProd').click();
 	}
 }
 
@@ -493,8 +488,11 @@ function openManageAccForm()
 function closeDelForm()
 {
 	document.getElementById('deleteProForm').style.width = "0%";
-	document.getElementById('manageAccount').style.width = "0%";
+	document.getElementById('manageAccount').style.width = "0%"; 
 	closeDetail();
+	document.getElementById('kind').value='idProduct';
+	document.getElementById('inputSearch').value='';
+	document.getElementById('search_result').innerHTML='';
 	closeAddForm();
 }
 
@@ -571,25 +569,18 @@ function searchByName()
 	}
 }
 
-function changeSearchType()
-{
-	var sel1 = document.getElementById("kind");
-	var text1 = sel1.options[sel1.selectedIndex].text;
-	if (text1 == 'ID')
-	{
-		document.getElementById("input").placeholder = "Search by product ID";
-		searchById();
-	}
-	else
-	{
-		document.getElementById("input").placeholder = "Search by product name";
-		searchByName();
-	}
+function searchProduct() {
+	document.getElementById("submitSearchProd").click();
 }
-
-function search()
-{
-	changeSearchType();
+function changeSearchProduct(){
+	document.getElementById('inputSearch').value='';
+	let kind = document.getElementById('kind').value;
+	if(kind =="idProduct"){
+		document.getElementById("inputSearch").placeholder = "Search by product ID";
+	} else {
+		document.getElementById("inputSearch").placeholder = "Search by product name";
+	}
+	searchProduct();
 }
 
 function getType(id)

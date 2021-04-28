@@ -265,15 +265,25 @@
 	<div class="form-container" id="EditProductForm"></div>
     <div id="deleteProForm">
         <h2 class="title" style="margin-top: -1px">MANAGE PRODUCTS</h2>
-        <input type="text" class="input" placeholder="Search by product ID" id="input" onkeyup="search()">
-        <a class="closebtn" onclick="closeDelForm()" style="cursor: pointer;">×</a>
-        <select id="kind" onchange="changeSearchType()">
-            <option selected>ID</option>
-            <option>Name</option>
-        </select>
-        <a class="addProduct" onclick="openForm()">ADD PRODUCT</a>
+        <form action="" method="get" id="formSearchProd">
+            <input type="text" class="input" placeholder="Search by product ID" id="inputSearch" name="inputSearch" onkeyup="searchProduct()">
+            <a class="closebtn" onclick="closeDelForm()" style="cursor: pointer;">×</a>
+            <select id="kind" name="kind" onchange="changeSearchProduct()">
+                <option selected value="idProduct">ID</option>
+                <option value = "nameProduct">Name</option>
+            </select>
+            <a class="addProduct" onclick="openForm()">ADD PRODUCT</a>
+            <input type="submit" name="submit" value="Submit Form" id="submitSearchProd"
+                            style="visibility: hidden; opacity: 0;" />
+        </form>
         <div class="form-container" id="addProductForm"></div>
         <div id="search_result" class="small_container"></div>
+        <form action="" method="POST" id="formActionProduct">
+            <input type="hidden" name="idProd" value="" id="idProd">
+            <input type="hidden" name="typeActionProd" value="" id="typeActionProd">
+            <input type="submit" name="submit" value="Submit-Bill" id="btnActionProd"
+                style="visibility: hidden; opacity: 0;" />
+        </form>
     </div>
     <div id="manageAccount">
         <h2 class="title" style="margin-top: -1px">MANAGE ACCOUNTS</h2>
@@ -365,6 +375,24 @@
                     year: $("#yearBills3").val()
                 }, function(data) {
                     $("#table-result2").html(data);
+                });
+            });
+
+            $("#formSearchProd").submit(function(event) {
+                event.preventDefault(); //prevent default action 
+                $.get("../thuan/searchProductAdmin.php", { kind:$("#kind").val(), inputSearch:$("#inputSearch").val()}, function(data){
+                    $("#search_result").html(data);
+                });
+            });
+
+            $("#formActionProduct").submit(function(event) {
+                event.preventDefault(); //prevent default action 
+                $.post("../thuan/productsManager.php", {
+                    typeActionProd: $("#typeActionProd").val(),
+                    idProd: $("#idProd").val(),
+                }, function(data) {
+                    $("#action-result").html(data);
+                    searchProduct();
                 });
             });
         });

@@ -74,6 +74,29 @@
             }
             return $data;
         },
+        'SearchProductsAdmin' => function($conn,$input,$kind) {
+            $condition = " = ";
+            $query = "SELECT * FROM sanpham AS sp INNER JOIN loai AS l ON sp.MaLoai = l.MaLo ";
+            if(strcmp($kind,"idProduct") == 0) {
+                if(empty($input)){
+                    $condition = " <> ";
+                    $input = 0;
+                }
+                $query = $query."WHERE MaSP".$condition.$input;
+            } else {
+                if(!empty($input)) {
+                    $query = $query."WHERE Ten LIKE '%".$input."%'";
+                }
+            }
+            $result = mysqli_query($conn,$query);
+            $data = array();
+            if($result){
+                while($row = mysqli_fetch_array($result)){
+                    $data[] = $row;
+                }
+            }
+            return $data;
+        },
         'updateProduct' => function($conn,$products) {
             $query ="UPDATE sanpham SET Ten = '".$products['Ten']."',Hinh = '".$products['Hinh']."',GiaBan = "
             .$products['GiaBan'].",MaLoai = ".$products['MaLoai'].",SoLuongTon = ".$products['SoLuongTon']
