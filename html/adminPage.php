@@ -276,7 +276,17 @@
             <input type="submit" name="submit" value="Submit Form" id="submitSearchProd"
                             style="visibility: hidden; opacity: 0;" />
         </form>
-        <div class="form-container" id="addProductForm"></div>
+        <div class="form-container" id="addProductForm">
+            <a class="closeDetail2" onclick="closeDetail()" style="cursor: pointer;color: #ff8c00;">×</a>
+            <form action="" method="POST" id="formAddOrUpdateProduct">
+                <h2>UPDATE PRODUCT</h2>
+                <input type="text" class="inputForm" value="" placeholder="Product name" id="product-name" name="product-name">
+                <input type="text" class="inputForm" value="" placeholder="Price" id="product-price" name="product-price"><input type="text" class="inputForm" value="" placeholder="Quantity in stock" id="quantity-in-stock" name="quantity-in-stock"><select class="inputForm" id="updateType" name="updateType">
+                </select>
+                <p style="margin-top: -4px; margin-bottom: -4px">Product image:</p>
+                <input type="file" class="inputForm" placeholder="Image" id="product-image" name="product-image"><button class="btn2" onclick = "editProduct()" style="width: 64%;margin-left: 5%;">Update</button><input type="hidden" name="idAddOrUpdateProd" value="" id="idAddOrUpdateProd"><input type="submit" name="submitProduct" value="Submit-Product" id="btnAddOrUpdateProduct" style="visibility: hidden; opacity: 0;" />
+            </form>
+        </div>
         <div id="search_result" class="small_container"></div>
         <form action="" method="POST" id="formActionProduct">
             <input type="hidden" name="idProd" value="" id="idProd">
@@ -395,6 +405,22 @@
                     searchProduct();
                 });
             });
+
+            $("#formAddOrUpdateProduct").submit(function(event) {
+                event.preventDefault(); //prevent default action 
+                $.post("../thuan/productsManager.php", {
+                    idAddOrUpdateProd: $("#idAddOrUpdateProd").val(),
+                    productName: $("#product-name").val(),
+                    productPrice: $("#product-price").val(),
+                    quantityInStock: $("#quantity-in-stock").val(),
+                    updateType: $("#updateType").val(),
+                    productImage: $("#product-image").val(),
+                }, function(data) {
+                    $("#action-result").html(data);
+                    searchProduct();
+                });
+            });
+
         });
         </script>
 </body>
