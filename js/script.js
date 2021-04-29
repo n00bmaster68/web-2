@@ -77,21 +77,14 @@ function showDetail(id)
 
 function showBill()
 {
+	document.getElementById('chart-product').style.display="none";
+	document.getElementById('container-data-product').style.display="none";
 	document.getElementById('container-data-bill').style.display= "block";
-	document.getElementById('result-statistic-product').innerHTML='';
-	if (localStorage['save_order'] != null)
-	{
-		var save_order = JSON.parse(localStorage.getItem('save_order'));
-		var result = "";
-		for (var i = save_order.length - 1; i >= 0; i--)
-		{
-			result += '<li style="display: inline-block; margin-right: 5%;margin-bottom: 2%;border-radius: 10px;border: 5px solid #ff8c00;"><p>Order ID: ' + save_order[i].id + '</p>' + '<p>Date: ' + save_order[i].date + '</p>' + '<p> Name:' + save_order[i].name + '</p><p>Total: ' + totalPrice(save_order[i].id) + '</p><p id="' + 'state' + save_order[i].id + '">State: ' + getState(save_order[i].state) + '</p>' + '<button class="detail" id="' + save_order[i].id + '" onclick="showDetail(this.id)" style="margin-bottom: 5px">Detail</button>' + '</li>';
-		}
-		result = '<ul id="client_bill">' + result + '</ul>';
-		result = '<h2 class="title">BILLS</h2>' + result;
-		document.getElementById("center").innerHTML = result;
-	}
-	else document.getElementById("center").innerHTML = '<h2 class="title">BILLS</h2>';
+	document.getElementById('statusBills').value=-2;
+	document.getElementById('monthBills').value=0;
+	changeYears("yearBills");
+	ClickBtnBill();
+	document.getElementById("center").innerHTML = '<h2 class="title">BILLS</h2>';
 	closeSideBar(); 
 	closeDetail();
 }
@@ -168,37 +161,46 @@ function closeDetail()
 
 // function saleReport(){changePage(0); closeSideBar(); closeDetail();}
 
-function changeYears(){
+function changeYears(idNAme){
 	var start = 2015;
 	var end = new Date().getFullYear();
 	var options = "<option selected value='0'>>--Select Year--<</option>";
 	for (var year = start; year <= end; year++) {
 		options += "<option value='" + year + "'>" + year + "</option>";
 	}
-	document.getElementById("yearBills2").innerHTML = options;
+	document.getElementById(idNAme).innerHTML = options;
 }
 
 function statisticBestProd(){
+	document.getElementById('container-data-product').style.display="none";
 	document.getElementById('container-data-bill').style.display="none";
     document.getElementById('chart-product').style.display="block";
+	document.getElementById('monthBills2').value=0;
+	document.getElementById('result-statistic-product').innerHTML='';
     document.getElementById('center').innerHTML="<h2 class=\"title\">Best-selling product statistics over time</h2>";
-	changeYears();
+	changeYears("yearBills2");
+	closeSideBar();
+}
+function statisticBestProdByType(){
+	document.getElementById('container-data-bill').style.display="none";
+    document.getElementById('chart-product').style.display="none";
+	document.getElementById('container-data-product').style.display="block";
+	document.getElementById('typeProductBill').value=0;
+	document.getElementById('monthBills3').value=0;
+	document.getElementById('table-result2').innerHTML='';
+	document.getElementById('center').innerHTML="<h2 class=\"title\">Product statistics over time and type</h2>";
+	changeYears("yearBills3");
 	closeSideBar();
 }
 
 function deleteProduct(id)
 {
-	if (confirm("Confirm to remove this product from store."))
-	{
-		console.log("doooooooooooo");
-		var product_info = JSON.parse(localStorage.getItem('product_info'));
-		for (var i = 0; i < product_info.length; i++)
-			if (product_info[i].id == id)
-			{
-				product_info.splice(i, 1);
-				break;
-			}
-		localStorage.setItem('product_info', JSON.stringify(product_info));
+	document.getElementById('message-confirm').innerHTML="Are you sure you want to delete ?";
+	document.getElementById('btnpopupConfirm').click();
+	document.getElementById('btnConfirm').onclick = function() {
+		document.getElementById('idProd').value=id;
+		document.getElementById('typeActionProd').value="delete";
+		document.getElementById('btnActionProd').click();
 	}
 }
 
@@ -486,8 +488,11 @@ function openManageAccForm()
 function closeDelForm()
 {
 	document.getElementById('deleteProForm').style.width = "0%";
-	document.getElementById('manageAccount').style.width = "0%";
+	document.getElementById('manageAccount').style.width = "0%"; 
 	closeDetail();
+	document.getElementById('kind').value='idProduct';
+	document.getElementById('inputSearch').value='';
+	document.getElementById('search_result').innerHTML='';
 	closeAddForm();
 }
 
@@ -564,25 +569,18 @@ function searchByName()
 	}
 }
 
-function changeSearchType()
-{
-	var sel1 = document.getElementById("kind");
-	var text1 = sel1.options[sel1.selectedIndex].text;
-	if (text1 == 'ID')
-	{
-		document.getElementById("input").placeholder = "Search by product ID";
-		searchById();
-	}
-	else
-	{
-		document.getElementById("input").placeholder = "Search by product name";
-		searchByName();
-	}
+function searchProduct() {
+	document.getElementById("submitSearchProd").click();
 }
-
-function search()
-{
-	changeSearchType();
+function changeSearchProduct(){
+	document.getElementById('inputSearch').value='';
+	let kind = document.getElementById('kind').value;
+	if(kind =="idProduct"){
+		document.getElementById("inputSearch").placeholder = "Search by product ID";
+	} else {
+		document.getElementById("inputSearch").placeholder = "Search by product name";
+	}
+	searchProduct();
 }
 
 function getType(id)
@@ -851,7 +849,6 @@ function getInfo2()
 
 function loadPage()
 {
-	document.getElementById('chart-product').style.display="none";
 	showBill();
 	var admin = localStorage.getItem('current_admin');
 	document.getElementById("admin").innerHTML = admin + "<span>Co-founder and owner</span>"

@@ -54,13 +54,13 @@
             <select id="statusBills" name="status" class="custom-select mb-3" style="width: 200px;"
                 onchange="ClickBtnBill()">
                 <option selected value='-2'>>--Select Status--< </option>
-                <option value='0'>Chua xu ly</option>
-                <option value='1'>Da xu ly</option>
-                <option value='2'>Da giao hang</option>
+                <option value='0'>Has n't been settled</option>
+                <option value='1'>Has been settled</option>
+                <option value='2'>Has been shipped</option>
             </select>
             <select id="monthBills" name="month" class="custom-select mb-3" style="width: 280px;"
                 onchange="ClickBtnBill()">
-                <option selected value='0'>>--Select Month--<< </option>
+                <option selected value='0'>>--Select Month--< </option>
                 <option value='1'>Janaury</option>
                 <option value='2'>February</option>
                 <option value='3'>March</option>
@@ -92,12 +92,12 @@
         <table class="fixed_header">
             <thead>
                 <tr>
-                    <th style="width: 40px;">MaHD</th>
-                    <th style="width: 40px;">MaKH</th>
-                    <th>TinhTrang</th>
-                    <th>NGAYXUAT</th>
-                    <th>ThanhTien</th>
-                    <th>Thao tac</th>
+                    <th style="width: 40px;">Bill's Code</th>
+                    <th style="width: 40px;">Customer's Code</th>
+                    <th>Status</th>
+                    <th>Created Date</th>
+                    <th>Payment</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody id="table-result">
@@ -105,27 +105,25 @@
                   if(!isset($_GET["status"])){
                       require_once('../utils/connect_db.php');	
                       ['findAllBills' => $Bills] = require '../Entities/bill.php';
-                      $data = $Bills($conn);
-                      require_once('../utils/close_db.php');
-                      
+                      $data = $Bills($conn);                      
                       for($i=0;$i<count($data);$i++) {
                           $price = intval($data[$i]['ThanhTien']);
                           $price1 =  number_format($price, 0, '', '.');
                           $status = "";
                           if($data[$i]['TinhTrang'] == 0) {
-                            $status = "Chua xu ly";
-                          } else if($data[$i]['TinhTrang'] == 1){
-                            $status = "Da xu ly";
-                          } else {
-                            $status = "Don hang da giao";
-                          }
-                          echo "<tr><td style=\"width: 75px;\">".$data[$i]['MaHD']."</td><td style=\"width: 75px;\">".$data[$i]['MaKH']."</td><td>".$status."</td><td>".$data[$i]['NGAYXUAT']."</td><td>".$price1." VND</td><td><button data-toggle=\"modal\" data-target=\"#myModal\" onclick=\"infoBill(".$data[$i]['MaHD'].")\" style=\"margin-left:30px;\" class=\"btn btn-sm btn-info btn-info\" data-toggle=\"tooltip\" title=\"Info\"><i class=\"fa fa-shopping-cart\" aria-hidden=\"true\"></i></button>
+                            $status = "Has n't been settled";
+                            } else if($data[$i]['TinhTrang'] == 1){
+                                $status = "Has been settled";
+                            } else {
+                                $status = "Has been shipped";
+                            }
+                          echo "<tr><td style=\"width: 85px;\">".$data[$i]['MaHD']."</td><td style=\"width: 85px;\">".$data[$i]['MaKH']."</td><td>".$status."</td><td>".$data[$i]['NGAYXUAT']."</td><td>".$price1." VND</td><td><button data-toggle=\"modal\" data-target=\"#myModal\" onclick=\"infoBill(".$data[$i]['MaHD'].")\" style=\"margin-left:30px;\" class=\"btn btn-sm btn-info btn-info\" data-toggle=\"tooltip\" title=\"Info\"><i class=\"fa fa-shopping-cart\" aria-hidden=\"true\"></i></button>
                           <button onclick=\"editBill(".$data[$i]['MaHD'].",".$data[$i]['TinhTrang'].")\" style=\"margin-left:1px;\" class=\"btn btn-sm btn-primary btn-edit\" data-toggle=\"tooltip\" title=\"Update\"><i class=\"fa fa-level-up\" aria-hidden=\"true\"></i></button>
                           <button onclick=\"deleteBill(".$data[$i]['MaHD'].")\" style=\"margin-left:1px;\" class=\"btn btn-sm btn-danger btn-delete\" data-toggle=\"tooltip\" title=\"Delete\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button>
                           </td></tr>";
                       }
                       if(count($data) == 0) {
-                          echo "<tr style=\"border: 1px solid orange;\"><td style=\"border: 0px;\"></td><td style=\"border: 0px;\"></td><td style=\"border: 0px; width: 100%;\">Khong co du lieu nao duoc tim thay !</td><td style=\"border: 0px;\"></td><td style=\"border: 0px;\"></td></tr>";
+                          echo "<tr style=\"border: 1px solid orange;\"><td style=\"border: 0px;\"></td><td style=\"border: 0px;\"></td><td style=\"border: 0px; width: 100%;\">No data was found !</td><td style=\"border: 0px;\"></td><td style=\"border: 0px;\"></td></tr>";
                       }
                   }
                   ?>
@@ -190,6 +188,59 @@
 			</div>
 		</div>
 	</div>
+
+    <div id="container-data-product" style="margin-left: 270px;margin-top: 50px;">
+        <form action="" method="GET" id="ProductFormGroup">
+            <select id="typeProductBill" name="typeProductBill" class="custom-select mb-3" style="width: 200px;"
+                onchange="ClickBtnBill3()">
+                <option selected value='0'> >--Product Type--< </option>
+                <?php
+                    ['findAllTypes' => $array] = require '../Entities/category.php';
+                    $data = $array($conn);
+                    for($i=0;$i<count($data);$i++) {
+                        echo "<option value=\"".$data[$i]['MaLo']."\">".$data[$i]['TenLoai']."</option>";
+                    }
+                    require_once('../utils/close_db.php');
+                ?>
+            </select>
+            <select id="monthBills3" name="month" class="custom-select mb-3" style="width: 280px;"
+                onchange="ClickBtnBill3()">
+                <option selected value='0'>>--Select Month--< </option>
+                <option value='1'>Janaury</option>
+                <option value='2'>February</option>
+                <option value='3'>March</option>
+                <option value='4'>April</option>
+                <option value='5'>May</option>
+                <option value='6'>June</option>
+                <option value='7'>July</option>
+                <option value='8'>August</option>
+                <option value='9'>September</option>
+                <option value='10'>October</option>
+                <option value='11'>November</option>
+                <option value='12'>December</option>
+            </select>
+            <select id="yearBills3" name="year" class="custom-select mb-3" style="width: 280px;"
+                onchange="ClickBtnBill3()">
+            </select>
+            <input type="submit" name="submit" value="Submit-Product" id="btnSubmitBill3"
+                style="visibility: hidden; opacity: 0;" />
+        </form>
+        <table class="fixed_header">
+            <thead>
+                <tr>
+                    <th style="width: 40px;">Product's Code</th>
+                    <th style="width: 40px;">Category's Code</th>
+                    <th>Product's Name</th>
+                    <th>Category's Name</th>
+                    <th>Amount</th>
+                    <th>Total Transaction Value</th>
+                </tr>
+            </thead>
+            <tbody id="table-result2">
+            </tbody>
+        </table>
+    </div>
+
 	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -214,15 +265,25 @@
 	<div class="form-container" id="EditProductForm"></div>
     <div id="deleteProForm">
         <h2 class="title" style="margin-top: -1px">MANAGE PRODUCTS</h2>
-        <input type="text" class="input" placeholder="Search by product ID" id="input" onkeyup="search()">
-        <a class="closebtn" onclick="closeDelForm()" style="cursor: pointer;">×</a>
-        <select id="kind" onchange="changeSearchType()">
-            <option selected>ID</option>
-            <option>Name</option>
-        </select>
-        <a class="addProduct" onclick="openForm()">ADD PRODUCT</a>
+        <form action="" method="get" id="formSearchProd">
+            <input type="text" class="input" placeholder="Search by product ID" id="inputSearch" name="inputSearch" onkeyup="searchProduct()">
+            <a class="closebtn" onclick="closeDelForm()" style="cursor: pointer;">×</a>
+            <select id="kind" name="kind" onchange="changeSearchProduct()">
+                <option selected value="idProduct">ID</option>
+                <option value = "nameProduct">Name</option>
+            </select>
+            <a class="addProduct" onclick="openForm()">ADD PRODUCT</a>
+            <input type="submit" name="submit" value="Submit Form" id="submitSearchProd"
+                            style="visibility: hidden; opacity: 0;" />
+        </form>
         <div class="form-container" id="addProductForm"></div>
         <div id="search_result" class="small_container"></div>
+        <form action="" method="POST" id="formActionProduct">
+            <input type="hidden" name="idProd" value="" id="idProd">
+            <input type="hidden" name="typeActionProd" value="" id="typeActionProd">
+            <input type="submit" name="submit" value="Submit-Bill" id="btnActionProd"
+                style="visibility: hidden; opacity: 0;" />
+        </form>
     </div>
     <div id="manageAccount">
         <h2 class="title" style="margin-top: -1px">MANAGE ACCOUNTS</h2>
@@ -252,15 +313,7 @@
     <script src="../js/scripts.js"></script>
     <script src="../js/script.js"></script>
 	<script>
-		var start = 2015;
-		var end = new Date().getFullYear();
-		var options = "<option selected value='0'>>--Select Year--<</option>";
-		for (var year = start; year <= end; year++) {
-			options += "<option value='" + year + "'>" + year + "</option>";
-		}
-		document.getElementById("yearBills").innerHTML = options;
         $(document).ready(function() {
-			changeYears();
             document.getElementById('btnConfirmNo').onclick = function() {
                 setTimeout(function() {
                     document.getElementById('btnConfirm').style = "display: block";
@@ -312,6 +365,36 @@
                     delete chart2;
 				});
 			});
+
+            $("#ProductFormGroup").submit(function(event) {
+                event.preventDefault(); //prevent default action 
+                var post_url = $(this).attr("action"); //get form action url
+                $.get("../thuan/statisticBestProdByType.php", {
+                    typeProductBill: $("#typeProductBill").val(),
+                    month: $("#monthBills3").val(),
+                    year: $("#yearBills3").val()
+                }, function(data) {
+                    $("#table-result2").html(data);
+                });
+            });
+
+            $("#formSearchProd").submit(function(event) {
+                event.preventDefault(); //prevent default action 
+                $.get("../thuan/searchProductAdmin.php", { kind:$("#kind").val(), inputSearch:$("#inputSearch").val()}, function(data){
+                    $("#search_result").html(data);
+                });
+            });
+
+            $("#formActionProduct").submit(function(event) {
+                event.preventDefault(); //prevent default action 
+                $.post("../thuan/productsManager.php", {
+                    typeActionProd: $("#typeActionProd").val(),
+                    idProd: $("#idProd").val(),
+                }, function(data) {
+                    $("#action-result").html(data);
+                    searchProduct();
+                });
+            });
         });
         </script>
 </body>

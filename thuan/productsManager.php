@@ -1,9 +1,9 @@
 <?php
-    $idBill = $_POST["idBill"];
-    $typeActionBill = $_POST["typeActionBill"];
+    $idProd = $_POST["idProd"];
+    $typeActionProd = $_POST["typeActionProd"];
     $res = "";
     require_once('../utils/connect_db.php');	
-    if($typeActionBill == "edit") {
+    if($typeActionProd == "edit") {
         $statusBill = $_POST["statusBill"];
         ['updateBill' => $check] = require '../Entities/bill.php';
         $flag = $check($conn,$idBill,$statusBill);
@@ -18,9 +18,9 @@
             document.getElementById('message-confirm').innerHTML=\"Change status success !\";
             document.getElementById('btnConfirmNo').innerHTML=\"Close\";</script>";
         }        
-    } else if($typeActionBill == "delete") {
-        ['deleteBill' => $check] = require '../Entities/bill.php';
-        $flag = $check($conn,$idBill);
+    } else if($typeActionProd == "delete") {
+        ['deleteProduct' => $check] = require '../Entities/product.php';
+        $flag = $check($conn,$idProd);
         if(!$flag) {
             $res = $res."<script>document.getElementById('btnConfirm').style=\"display: none\";
             document.getElementById('message-confirm').style=\"color: red\";
