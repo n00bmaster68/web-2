@@ -254,10 +254,8 @@ function AddProduct()
 
 function openForm()
 {
-	document.getElementById('addProductForm').style.top = "15%";
-	document.getElementById('addProductForm').style.height = "393px";
-	document.getElementById('addProductForm').innerHTML = '<a class="closeDetail2" onclick="closeDetail()" style="cursor: pointer;">×</a><form><h2>ADD PRODUCT</h2><input type="text" placeholder="Product name" id="product_name"><input type="text" placeholder="Price" id="Price"><input type="text" placeholder="Price" id="price"><input type="text" placeholder="Product type" id="type"><p style="margin-top: -4px; margin-bottom: -4px">Product image:</p><input type="file" placeholder="Image" id="image"><a class="btn" onclick = "AddProduct()" style="width: 64%">ADD</a></form>'
-	closeSideBar();
+	document.getElementById('typeActionProd').value="create";
+	document.getElementById('btnActionProd').click();
 }
 
 function openFormEdit(id)
@@ -625,11 +623,6 @@ function editInfo(id)
 	document.getElementById('EditProductForm').style.top = "15%";
 }
 
-function editProduct(id){
-	document.getElementById('idAddOrUpdateProd').value=id;
-	document.getElementById('btnAddOrUpdateProduct').click();
-}
-
 function checkExistPid(id)
 {
 	var stored_products = JSON.parse(localStorage.getItem('product_info'));
@@ -861,7 +854,7 @@ function getInfo2()
 
 function loadPage()
 {
-	document.getElementById('addProductForm').style.display="none";
+	document.getElementById('addProductForm').style.top = "-300%";
 	showBill();
 	var admin = localStorage.getItem('current_admin');
 	document.getElementById("admin").innerHTML = admin + "<span>Co-founder and owner</span>"

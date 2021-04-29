@@ -279,12 +279,17 @@
         <div class="form-container" id="addProductForm">
             <a class="closeDetail2" onclick="closeDetail()" style="cursor: pointer;color: #ff8c00;">×</a>
             <form action="" method="POST" id="formAddOrUpdateProduct">
-                <h2>UPDATE PRODUCT</h2>
-                <input type="text" class="inputForm" value="" placeholder="Product name" id="product-name" name="product-name">
-                <input type="text" class="inputForm" value="" placeholder="Price" id="product-price" name="product-price"><input type="text" class="inputForm" value="" placeholder="Quantity in stock" id="quantity-in-stock" name="quantity-in-stock"><select class="inputForm" id="updateType" name="updateType">
+                <h2 id="title-AddOrUp">UPDATE PRODUCT</h2>
+                <input type="text" class="inputForm" placeholder="Product name" id="product-name" name="product-name">
+                <input type="text" class="inputForm" placeholder="Price" id="product-price" name="product-price">
+                <input type="text" class="inputForm" placeholder="Quantity in stock" id="quantity-in-stock" name="quantity-in-stock">
+                <select class="inputForm" id="updateType" name="updateType">
                 </select>
                 <p style="margin-top: -4px; margin-bottom: -4px">Product image:</p>
-                <input type="file" class="inputForm" placeholder="Image" id="product-image" name="product-image"><button class="btn2" onclick = "editProduct()" style="width: 64%;margin-left: 5%;">Update</button><input type="hidden" name="idAddOrUpdateProd" value="" id="idAddOrUpdateProd"><input type="submit" name="submitProduct" value="Submit-Product" id="btnAddOrUpdateProduct" style="visibility: hidden; opacity: 0;" />
+                <input type="file" class="inputForm" placeholder="Image" id="product-image" name="product-image">
+                <button class="btn2" id="btnAddOrUpdate" onclick="() => {document.getElementById('btnAddOrUpdateProduct').click();}" style="width: 64%;margin-left: 5%;">Update</button>
+                <input type="hidden" name="idAddOrUpdateProd" id="idAddOrUpdateProd">
+                <input type="submit" name="submitProduct" value="Submit-Product" id="btnAddOrUpdateProduct" style="visibility: hidden; opacity: 0;" />
             </form>
         </div>
         <div id="search_result" class="small_container"></div>
@@ -402,7 +407,6 @@
                     idProd: $("#idProd").val(),
                 }, function(data) {
                     $("#action-result").html(data);
-                    searchProduct();
                 });
             });
 
@@ -414,7 +418,7 @@
                     productPrice: $("#product-price").val(),
                     quantityInStock: $("#quantity-in-stock").val(),
                     updateType: $("#updateType").val(),
-                    productImage: $("#product-image").val(),
+                    // productImage: $("#product-image").val(),
                 }, function(data) {
                     $("#action-result").html(data);
                     searchProduct();
