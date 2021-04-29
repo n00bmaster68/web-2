@@ -26,6 +26,7 @@ function addPHP(idSP){
 function orderPHP(){
     var data={};
     data['email']=document.getElementById("userName").getAttribute("thongtin");
+    data['total'] = document.getElementById("orderBill").getAttribute("price");
     var xml=new XMLHttpRequest();
     xml.onreadystatechange=function(){
         if(xml.readyState==4&&xml.status==200){
