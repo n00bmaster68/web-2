@@ -53,7 +53,7 @@ function showCartInfo(spArray)
         thead = thead + info + "</tbody>";
     }
     // console.log(thead);
-    var orderBTN = "Total: " + parseInt(total).toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '<a class="btn" style="cursor: pointer;margin-left: 20px" onclick="orderPHP()">Order</a>';
+    var orderBTN = "Total: " + parseInt(total).toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '<a class="btn" style="cursor: pointer;margin-left: 20px" onclick="orderPHP()" price="' + total + '" id="orderBill">Order</a>';
     document.getElementById("MyCart").innerHTML = thead;
     document.getElementById("btr").innerHTML = orderBTN;
     // console.log(document.getElementById("MyCart"));
@@ -114,16 +114,19 @@ function showOrderInfo(spArray)
 
 function openCart()
 {
-    menutoggle();
+    if (!((document.getElementById("MenuItems").style.maxHeight).localeCompare("0px") == 0))
+        menutoggle();
     document.getElementById('cart').style.top = "0%";
     checkCookie();
 }
 
 function yourOrder()
 {
-    menutoggle()
+    console.log(document.getElementById("MenuItems").style.maxHeight);
+   if (!((document.getElementById("MenuItems").style.maxHeight).localeCompare("0px") == 0))
+        menutoggle();
     document.getElementById('order').style.top = "0%";
-     checkCookie();
+    checkCookie();
 }
 
 function checkCookie(){

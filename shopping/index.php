@@ -89,7 +89,7 @@
             return $this->conn->writeData($query);
         }
         function order(){
-            $query="UPDATE `hoadon` SET `NGAYXUAT`='".date("Y/m/d")."',`TinhTrang`=1 WHERE MaHD='".$this->mhd."'";
+            $query="UPDATE `hoadon` SET `NGAYXUAT`='".date("Y/m/d")."',`TinhTrang`=1, thanhtien = ".$this->request['total']."  WHERE MaHD='".$this->mhd."'";
             $result=$this->conn->writeData($query);
 
             $query="INSERT INTO `hoadon`(`MaKH`, `TinhTrang`) VALUES ('".$this->mkh."','0')";
