@@ -22,7 +22,7 @@
             <table id="MyCart" class="table table-success table-striped"></table>
             <div class="bottom_right" id="btr"></div>
         </div>
-        <div class="order" style="width: 100%; height: 100%; top: 0%;" id="order">
+        <div class="order" style="width: 100%; height: 100%; top: -600%;" id="order">
             
             <a class="closeCart" onclick="closeOrder()" style="cursor: pointer;margin-top: -20px; color: black">×</a>
             <h2 style="margin-left: 0%;color: #ff8c00;margin-top: 0%;font-size: 35px;">Your order <i class="fas fa-clipboard-list"></i></h2>

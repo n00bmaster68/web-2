@@ -109,12 +109,7 @@ function showOrderInfo(spArray)
             }
         }
     }
-    // console.log(thead);
-    // inSide += infoHD + "<br>Total: " + parseInt(total).toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + "<br>Status: " + getStatus(spArray[0]['tinhtrang']) + '</div>'+ thead
-    // var orderBTN = 
-    console.log(inSide);
     document.getElementById("order").innerHTML = inSide;
-    // console.log(document.getElementById("MyCart"));
 }
 
 function openCart()
@@ -135,9 +130,9 @@ function checkCookie(){
     var xml=new XMLHttpRequest();
     xml.onreadystatechange=function(){
         if(xml.readyState==4 && xml.status==200){
-            console.log(xml.responseText);
+            // console.log(xml.responseText);
             response=JSON.parse(xml.responseText);
-            console.log(response);
+            // console.log(response);
             if(response['status']==1){
                 console.log("not run");
                 
@@ -165,10 +160,10 @@ function loginPHP(){
     let email=document.querySelector('#user_name'),password=document.querySelector('#password');
     xml.onreadystatechange=function(){
         if(xml.readyState==4 && xml.status==200){
-            console.log(xml.responseText);
+            // console.log(xml.responseText);
             response=JSON.parse(xml.responseText);
-            console.log(response);
-            console.log(xml.responseText);
+            // console.log(response);
+            // console.log(xml.responseText);
             if(response['status']==1){
                 document.getElementById("acc").innerHTML = '<a id="userName">' + response['thongtin']['name'].split(" ").splice(-1) + '</a>';
                 document.getElementById("logOut").style.display = "inline-block";
@@ -180,7 +175,7 @@ function loginPHP(){
             }
         }
     }
-    console.log("truoc: "+email+" "+password);
+    // console.log("truoc: "+email+" "+password);
     xml.open('post','../login/login.php');
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xml.send(`requestType=2&email=${email.value}&pass=${password.value}`);
@@ -191,7 +186,7 @@ function log(){
     xml.onreadystatechange=function(){
         if(xml.readyState==4 && xml.status==200){
             response=JSON.parse(xml.responseText);
-            console.log(xml.responseText);
+            // console.log(xml.responseText);
 
             if(response['status']==1)
             {
@@ -258,9 +253,9 @@ function registerPHP(){
     var xml=new XMLHttpRequest();
     xml.onreadystatechange=function(){
         if(xml.readyState==4 && xml.status==200){
-            // response=JSON.parse(xml.responseText);
+            response=JSON.parse(xml.responseText);
             // console.log(response);
-            console.log(xml.responseText);
+            // console.log(xml.responseText);
             if (response["status"] == 1)
             {
                 name=document.querySelector('#user_name1').value;
