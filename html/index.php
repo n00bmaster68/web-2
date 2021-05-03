@@ -34,7 +34,7 @@
             <div class="container">
                 <div class="navbar">
                     <div class="logo">
-                        <a href="home.php">
+                        <a href="index.php">
                             <img src="..\image\logo420.png" width="390px">
                         </a>
                     </div>
