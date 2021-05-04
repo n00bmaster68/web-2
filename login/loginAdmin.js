@@ -60,7 +60,7 @@ function loginPHP(){
                 console.log(response);
                 // console.log(xml.responseText);
                 if(response['status']==1){
-                    window.location.replace("http://localhost:8080/project/web-2/html/AdminPage.php");
+                    window.location.replace((window.location.href).split("/").slice(0, -1).join("/") + "/adminPage.php");
                 }
                 else{
                     alert("Log in, unsuccessfully");
