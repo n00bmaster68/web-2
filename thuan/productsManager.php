@@ -33,8 +33,7 @@
             }
             $res = $res . "<script> document.getElementById('addProductForm').style.top = \"15%\";document.getElementById('addProductForm').style.height = \"393px\";"
             ."document.getElementById('product-name').value='".$product['Ten']."';document.getElementById('product-price').value='".$product['GiaBan']."';document.getElementById('quantity-in-stock').value='"
-            .$product['SoLuongTon']."';document.getElementById('updateType').innerHTML='".$selectType."';document.getElementById(\"idAddOrUpdateProd\").value = '".$product['MaSP']."'; searchProduct();</script>";
-            //document.getElementById('product-image').value='".$product['Hinh']."';
+            .$product['SoLuongTon']."';document.getElementById('product-image').value='';document.getElementById('updateType').innerHTML='".$selectType."';document.getElementById(\"idAddOrUpdateProd\").value = '".$product['MaSP']."'; searchProduct();</script>";
         } else if($typeActionProd == "create") {
             $selectType = "";
             ['findAllTypes' => $arrayType] = require '../Entities/category.php';
@@ -44,8 +43,7 @@
             }
             $res = $res . "<script> document.getElementById('addProductForm').style.top = \"15%\";document.getElementById('addProductForm').style.height = \"393px\";
             document.getElementById('updateType').innerHTML='".$selectType."'; document.getElementById('title-AddOrUp').innerHTML=\"CREATE PRODUCT\";document.getElementById('btnAddOrUpdate').innerHTML=\"CREATE\"; ".
-            " document.getElementById('product-name').value='';document.getElementById('product-price').value='';document.getElementById('quantity-in-stock').value='';document.getElementById(\"idAddOrUpdateProd\").value=''; </script>";
-            //document.getElementById('product-image').value='';
+            " document.getElementById('product-name').value='';document.getElementById('product-image').value='';document.getElementById('product-price').value='';document.getElementById('quantity-in-stock').value='';document.getElementById(\"idAddOrUpdateProd\").value=''; </script>";
         }
     }
 
