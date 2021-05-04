@@ -356,6 +356,7 @@ function getProductName(id)
 
 function openDelForm()
 {
+	searchProduct();
 	document.getElementById('deleteProForm').style.width = "100%"; 
 	closeSideBar();
 	closeDetail();

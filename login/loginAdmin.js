@@ -19,9 +19,10 @@ function checkCookie(){
             console.log(response);
             if(response['status']==1){
                 var flag = 0;
-                if (window.location.href === "http://localhost:8080/project/web-2/html/logInAdmin.html")
+
+                if ((window.location.href).split("/")[((window.location.href).split("/")).length-1] === "logInAdmin.html")
                 {
-                    window.location.replace("http://localhost:8080/project/web-2/html/AdminPage.php");
+                    window.location.replace((window.location.href).split("/").slice(0, -1).join("/") + "/AdminPage.php");
                     // window.location.href.replace(window.location.search,'');
                 }
                 else
@@ -35,8 +36,8 @@ function checkCookie(){
                 if(response['status']==-1)
                 {
                     console.log("hahahaha");
-                     if (window.location.href !== "http://localhost:8080/project/web-2/html/logInAdmin.html")
-                        window.location.replace("http://localhost:8080/project/web-2/html/logInAdmin.html");
+                     if ((window.location.href).split("/")[((window.location.href).split("/")).length-1] !== "logInAdmin.html")
+                        window.location.replace((window.location.href).split("/").slice(0, -1).join("/") + "/logInAdmin.html");
                 }
             }
         }
