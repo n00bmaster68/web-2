@@ -17,27 +17,28 @@
 </head>
 <body style="background: #2f4f4f">
 	<div class="login-page" id="account" style="display:block">
-                <div class="container">
-                    <div class="row" style="height:1000px">
-                        <div class="col3">
-                            <div class="form-container" style="top: -114px; height: 270px">
-                                <div class="form-btn">
-                                    <span onclick="Login()">Log in</span>
-                                    <hr id="indicator1">
-                                </div>
-
-                                <form id="login" style="left:0;" method="POST" action="adminPage.php">
-                                    <input type="text" placeholder="User name" id="user_name">
-                                    <input type="password" placeholder="Password" id="password">
-                                    <button class="btn" onclick="">Log in</button>
-                                </form>
-
-                                
-                            </div>
+        <div class="container">
+            <div class="row" style="height:1000px">
+                <div class="col3">
+                    <div class="form-container" style="top: -114px; height: 270px">
+                        <div class="form-btn">
+                            <span onclick="Login()">Log in</span>
+                            <hr id="indicator1">
                         </div>
+
+                        <form id="login" style="left:0;">
+                            <input type="text" placeholder="User name" id="user_name">
+                            <input type="password" placeholder="Password" id="password">
+                            <a class="btn" onclick="loginPHP()">Log in</a>
+                        </form>
+
+                        
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 	
+	<script src="../login/loginAdmin.js"></script>
 </body>
 </html>

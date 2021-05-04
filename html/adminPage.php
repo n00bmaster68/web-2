@@ -326,6 +326,7 @@
         </div>
     </div>
     <script src="../js/scripts.js"></script>
+    <script src="../login/loginAdmin.js"></script>
     <script src="../js/script.js"></script>
 	<script>
         $(document).ready(function() {

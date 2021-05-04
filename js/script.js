@@ -852,13 +852,7 @@ function getInfo2()
 	}
 }
 
-function loadPage()
-{
-	document.getElementById('addProductForm').style.top = "-300%";
-	showBill();
-	var admin = localStorage.getItem('current_admin');
-	document.getElementById("admin").innerHTML = admin + "<span>Co-founder and owner</span>"
-}
+
 
 function checkAdmin(name)
 {
