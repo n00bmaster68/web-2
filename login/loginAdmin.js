@@ -22,7 +22,7 @@ function checkCookie(){
 
                 if ((window.location.href).split("/")[((window.location.href).split("/")).length-1] === "logInAdmin.html")
                 {
-                    window.location.replace((window.location.href).split("/").slice(0, -1).join("/") + "/AdminPage.php");
+                    window.location.replace((window.location.href).split("/").slice(0, -1).join("/") + "/adminPage.php");
                     // window.location.href.replace(window.location.search,'');
                 }
                 else

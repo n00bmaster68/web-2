@@ -134,7 +134,7 @@
                                     <input type="text" placeholder="User name" id="user_name">
                                     <input type="password" placeholder="Password" id="password">
                                     <a class="btn" onclick="loginPHP()">Log in</a>
-                                    <a onclick="forgotPW()" style="cursor: pointer;">Forgot password |</a>
+                                    <!-- <a onclick="forgotPW()" style="cursor: pointer;">Forgot password |</a> -->
                                     <a onclick="close_login_reg_form()" style="cursor: pointer;">| Cancel</a>
                                 </form>
 
