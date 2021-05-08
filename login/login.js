@@ -210,6 +210,17 @@ function log(){
     document.getElementById("logOut").style.display = "none";
 }
 
+function validateVietnameseName()
+{
+    var firstLetter="[A-EGHIK-VXYÂĐỔÔÚỨ]".normalize("NFC"),
+        otherLetters="[a-eghik-vxyàáâãèéêìíòóôõùúýỳỹỷỵựửữừứưụủũợởỡờớơộổỗồốọỏịỉĩệểễềếẹẻẽặẳẵằắăậẩẫầấạảđ₫]".normalize("NFC"),
+        regexString="^"+firstLetter+otherLetters+"+\\s"+"("+firstLetter+otherLetters+"+\\s)*"+firstLetter+otherLetters+"+$",
+        regexPattern=RegExp(regexString);
+    if(regexPattern.test(document.getElementById('user_name1').value.normalize("NFC")))
+        return true;
+    return false;
+}
+
 
 function validate() 
 {

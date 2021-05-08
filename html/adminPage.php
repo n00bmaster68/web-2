@@ -13,6 +13,9 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../css/style2.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+    integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 </head>
 </style>
 
@@ -43,7 +46,7 @@
             <li onclick="statisticBestProd()">Hot Selling Products Statistics</li>
             <li onclick="statisticBestProdByType()">Product Statistics By Type</li>
             <li onclick="openDelForm()">MANAGE PRODUCTS</li>
-            <li onclick="openManageAccForm()">MANAGE ACCOUNTS</li>
+            <li onclick="openManageAccForm()" id="ffa">MANAGE ACCOUNTS</li>
         </ul>
     </div>
 	<div id='center' class="main_center">
@@ -302,24 +305,38 @@
     </div>
     <div id="manageAccount">
         <h2 class="title" style="margin-top: -1px">MANAGE ACCOUNTS</h2>
-        <input type="text" class="input" placeholder="Search account" id="input2" onkeyup="search2()"
+
+        <form action="" method="get" id="searchCMM">
+            <input type="text" class="input" placeholder="Search account" id="input2" onkeyup="search2()"
             style="margin-bottom: 10px">
-        <a class="closebtn" onclick="closeDelForm()" style="cursor: pointer;">×</a>
-        <a class="addAcc" onclick="openForm2()">ADD ACCOUNT </a>
+            <a class="closebtn" onclick="closeDelForm()" style="cursor: pointer;">×</a>
+            <a class="addAcc" onclick="openForm2()">ADD ACCOUNT </a>
+            <input type="submit" name="submit" value="Submit Form" id="submitSearchUser"
+                            style="visibility: hidden; opacity: 0;" />
+        </form>
+
+        
         <div id="search_result1" class="small_container"></div>
-        <div id="addAccount" class="form-container" style="height: 475px">
+
+        <div id="addAccount" class="form-container" style="height: 480px">
             <form id="register">
                 <a class="closeDetail2" onclick="closeAddForm()" style="cursor: pointer;">×</a>
                 <h2 id="formName"></h2>
                 <input type="text" placeholder="User name" id="user_name1">
                 <input type="email" placeholder="Email" id="email">
                 <input type="password" placeholder="Password" id="password1">
-                <input type="text" placeholder="Phone number" id="phoneNumber">
                 <input type="text" placeholder="Address" id="address">
-                <select id="priority"></select>
-                <a class="btn3" onclick="getInfo1()" style="display: none; margin-left: 20px; width: 64%"
+                <select id="priority">
+                    <option value="1">Manager</option>
+                    <option value="2">Saleman</option>
+                </select>
+                <select id="status">
+                    <option value="1">Normal</option>
+                    <option value="0">Blocked</option>
+                </select>
+                <a class="btn3" onclick="addNV()" style="display: none; margin-left: 18%; width: 64%"
                     id="add">ADD</a>
-                <a class="btn3" onclick="getInfo2()" style="display: none; margin-left: 20px; width: 64%"
+                <a class="btn3" onclick="editUser()" style="display: none; margin-left: 18%; width: 64%"
                     id="save">SAVE</a>
                 <a onclick="closeAddForm()" style="cursor: pointer;">Cancel</a>
             </form>
@@ -328,6 +345,7 @@
     <script src="../js/scripts.js"></script>
     <script src="../login/loginAdmin.js"></script>
     <script src="../js/script.js"></script>
+    <script src="../edit/index.js"></script>
 	<script>
         $(document).ready(function() {
             document.getElementById('btnConfirmNo').onclick = function() {
@@ -398,6 +416,13 @@
                 event.preventDefault(); //prevent default action 
                 $.get("../thuan/searchProductAdmin.php", { kind:$("#kind").val(), inputSearch:$("#inputSearch").val()}, function(data){
                     $("#search_result").html(data);
+                });
+            });
+
+            $("#searchCMM").submit(function(event) {
+                event.preventDefault(); //prevent default action 
+                $.get("../thuan/loadUser.php", {inputSearch:$("#input2").val()}, function(data){
+                    $("#search_result1").html(data);
                 });
             });
 
