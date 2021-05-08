@@ -623,6 +623,12 @@ a:hover{
     background: black;
 }
 
+.btn3:hover
+{
+    color: #ff8c00 !important;
+    background: black;
+}
+
 option, select
 {
     color: #555;

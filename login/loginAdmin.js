@@ -16,6 +16,7 @@ function loadPage(name, mach)
 function openManageAccForm()
 {
     document.getElementById('manageAccount').style.width = "100%"; 
+    document.getElementById('input2').value = ""; 
     closeSideBar();
     closeDetail();
     var stored_accounts = JSON.parse(localStorage.getItem('user_info'));

@@ -356,6 +356,7 @@ function getProductName(id)
 
 function openDelForm()
 {
+	document.getElementById('inputSearch').value='';
 	searchProduct();
 	document.getElementById('deleteProForm').style.width = "100%"; 
 	closeSideBar();
@@ -474,8 +475,6 @@ function closeDelForm()
 	document.getElementById('manageAccount').style.width = "0%"; 
 	closeDetail();
 	document.getElementById('kind').value='idProduct';
-	document.getElementById('inputSearch').value='';
-	document.getElementById('search_result').innerHTML='';
 	closeAddForm();
 }
 

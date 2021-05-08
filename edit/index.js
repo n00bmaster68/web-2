@@ -56,6 +56,9 @@ function openForm2()
     closeDetail();
     document.getElementById('addAccount').style.top = '15%';
     document.getElementById("formName").innerHTML = "ADD ACCOUNT";
+    document.getElementById("status").value = "1";
+    document.getElementById("priority").value = "1";
+    document.getElementById("email").disabled = false;
     document.getElementById("add").style.display = "block";
     document.getElementById("save").style.display = "none";
     document.getElementById("priority").style.display = "inline";
@@ -139,6 +142,8 @@ function addNV(){
         xml.open("POST", "../edit/index.php", true);
         xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xml.send(`requestType=1&requestData=${JSON.stringify(data)}`);
+        alert('Add success');
+        closeAddForm();
     }
 }
 
@@ -159,6 +164,7 @@ function editNV(){
         xml.open("POST", "../edit/index.php", true);
         xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xml.send(`requestType=2&requestData=${JSON.stringify(data)}`);
+        alert('Update success');
     }
 }
 
@@ -177,6 +183,7 @@ function editKH(){
     xml.open("POST", "../edit/index.php", true);
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xml.send(`requestType=3&requestData=${JSON.stringify(data)}`);
+    alert('Update success');
 }
 
 function editUser()
