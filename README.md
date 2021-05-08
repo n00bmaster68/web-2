@@ -1,4 +1,4 @@
-# Web application development project 2
+# Web application development project
 
 ![](https://codewebdao.com/upload/users/1/img/hinhminhhoa/php/php.png)
 
