@@ -362,7 +362,7 @@
             $("#BillFormGroup").submit(function(event) {
                 event.preventDefault(); //prevent default action 
                 var post_url = $(this).attr("action"); //get form action url
-                $.get("../thuan/listBills.php", {
+                $.get("../PHP/listBills.php", {
                     status: $("#statusBills").val(),
                     month: $("#monthBills").val(),
                     year: $("#yearBills").val()
@@ -373,7 +373,7 @@
             $("#formActionBill").submit(function(event) {
                 event.preventDefault(); //prevent default action 
                 var post_url = $(this).attr("action"); //get form action url
-                $.post("../thuan/billsManager.php", {
+                $.post("../PHP/billsManager.php", {
                     statusBill: $("#statusBill").val(),
                     idBill: $("#idBill").val(),
                     typeActionBill: $("#typeActionBill").val()
@@ -386,7 +386,7 @@
 			$("#ChartFormGroup").submit(function(event) {
 				event.preventDefault(); //prevent default action 
 				var post_url = $(this).attr("action"); //get form action url
-				$.get("../thuan/statisticBestProd.php", {
+				$.get("../PHP/statisticBestProd.php", {
 					typeProducts: 0,
 					month: $("#monthBills2").val(),
 					year: $("#yearBills2").val()
@@ -403,7 +403,7 @@
             $("#ProductFormGroup").submit(function(event) {
                 event.preventDefault(); //prevent default action 
                 var post_url = $(this).attr("action"); //get form action url
-                $.get("../thuan/statisticBestProdByType.php", {
+                $.get("../PHP/statisticBestProdByType.php", {
                     typeProductBill: $("#typeProductBill").val(),
                     month: $("#monthBills3").val(),
                     year: $("#yearBills3").val()
@@ -414,21 +414,21 @@
 
             $("#formSearchProd").submit(function(event) {
                 event.preventDefault(); //prevent default action 
-                $.get("../thuan/searchProductAdmin.php", { kind:$("#kind").val(), inputSearch:$("#inputSearch").val()}, function(data){
+                $.get("../PHP/searchProductAdmin.php", { kind:$("#kind").val(), inputSearch:$("#inputSearch").val()}, function(data){
                     $("#search_result").html(data);
                 });
             });
 
             $("#searchCMM").submit(function(event) {
                 event.preventDefault(); //prevent default action 
-                $.get("../thuan/loadUser.php", {inputSearch:$("#input2").val()}, function(data){
+                $.get("../PHP/loadUser.php", {inputSearch:$("#input2").val()}, function(data){
                     $("#search_result1").html(data);
                 });
             });
 
             $("#formActionProduct").submit(function(event) {
                 event.preventDefault(); //prevent default action 
-                $.post("../thuan/productsManager.php", {
+                $.post("../PHP/productsManager.php", {
                     typeActionProd: $("#typeActionProd").val(),
                     idProd: $("#idProd").val(),
                 }, function(data) {
@@ -448,7 +448,7 @@
                 fd.append('updateType',$("#updateType").val());
 
                 $.ajax({
-                    url: "../thuan/productsManager.php",
+                    url: "../PHP/productsManager.php",
                     type: 'POST',
                     data: fd,
                     contentType: false,
