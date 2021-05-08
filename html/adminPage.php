@@ -281,15 +281,15 @@
         </form>
         <div class="form-container" id="addProductForm">
             <a class="closeDetail2" onclick="closeDetail()" style="cursor: pointer;color: #ff8c00;">×</a>
-            <form action="" method="POST" id="formAddOrUpdateProduct">
+            <form action="" method="POST" id="formAddOrUpdateProduct" enctype="multipart/form-data">
                 <h2 id="title-AddOrUp">UPDATE PRODUCT</h2>
-                <input type="text" class="inputForm" placeholder="Product name" id="product-name" name="product-name" required>
-                <input type="number" min="1" class="inputForm" placeholder="Price" id="product-price" name="product-price" required>
-                <input type="number" min="1" class="inputForm" placeholder="Quantity in stock" id="quantity-in-stock" name="quantity-in-stock" required>
+                <input type="text" class="inputForm" placeholder="Product name" id="product-name" name="productName" required>
+                <input type="number" min="1" class="inputForm" placeholder="Price" id="product-price" name="productPrice" required>
+                <input type="number" min="1" class="inputForm" placeholder="Quantity in stock" id="quantity-in-stock" name="quantityInStock" required>
                 <select class="inputForm" id="updateType" name="updateType">
                 </select>
                 <p style="margin-top: -4px; margin-bottom: -4px">Product image:</p>
-                <input type="file" class="inputForm" placeholder="Image" id="product-image" name="product-image" required accept="image/*">
+                <input type="file" class="inputForm" placeholder="Image" id="product-image" name="productImage">
                 <button class="btn2" id="btnAddOrUpdate" onclick="() => {document.getElementById('btnAddOrUpdateProduct').click();}" style="width: 64%;margin-left: 5%;">Update</button>
                 <input type="hidden" name="idAddOrUpdateProd" id="idAddOrUpdateProd">
                 <input type="submit" name="submitProduct" value="Submit-Product" id="btnAddOrUpdateProduct" style="visibility: hidden; opacity: 0;" />
@@ -438,19 +438,28 @@
 
             $("#formAddOrUpdateProduct").submit(function(event) {
                 event.preventDefault(); //prevent default action 
-                $.post("../thuan/productsManager.php", {
-                    idAddOrUpdateProd: $("#idAddOrUpdateProd").val(),
-                    productName: $("#product-name").val(),
-                    productPrice: $("#product-price").val(),
-                    quantityInStock: $("#quantity-in-stock").val(),
-                    updateType: $("#updateType").val(),
-                    // productImage: $("#product-image").val(),
-                }, function(data) {
-                    $("#action-result").html(data);
-                    searchProduct();
-                });
-            });
+                var fd = new FormData();
+                var files = $('#product-image')[0].files;
+                fd.append('productImage',files[0]);
+                fd.append('idAddOrUpdateProd',$("#idAddOrUpdateProd").val());
+                fd.append('productName',$("#product-name").val());
+                fd.append('productPrice',$("#product-price").val());
+                fd.append('quantityInStock',$("#quantity-in-stock").val());
+                fd.append('updateType',$("#updateType").val());
 
+                $.ajax({
+                    url: "../thuan/productsManager.php",
+                    type: 'POST',
+                    data: fd,
+                    contentType: false,
+                    processData: false,
+                    success: function(response){
+                        $("#action-result").html(response);
+                        searchProduct();
+                    },
+                });
+
+            });
         });
         </script>
 </body>
