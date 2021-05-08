@@ -24,7 +24,7 @@ function validate(key)
     if (validateVietnameseName() != true)
     {
         res = false;
-        alert("Name only contains word characters"); 
+        alert("Name only contains word characters, first letter of each word must be capitalized"); 
         return res;
     }
     if (regexEmail.test(email) != true)

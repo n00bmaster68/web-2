@@ -210,18 +210,6 @@ function log(){
     document.getElementById("logOut").style.display = "none";
 }
 
-function validateVietnameseName()
-{
-    var firstLetter="[A-EGHIK-VXYÂĐỔÔÚỨ]".normalize("NFC"),
-        otherLetters="[a-eghik-vxyàáâãèéêìíòóôõùúýỳỹỷỵựửữừứưụủũợởỡờớơộổỗồốọỏịỉĩệểễềếẹẻẽặẳẵằắăậẩẫầấạảđ₫]".normalize("NFC"),
-        regexString="^"+firstLetter+otherLetters+"+\\s"+"("+firstLetter+otherLetters+"+\\s)*"+firstLetter+otherLetters+"+$",
-        regexPattern=RegExp(regexString);
-    if(regexPattern.test(document.getElementById('user_name1').value.normalize("NFC")))
-        return true;
-    return false;
-}
-
-
 function validate() 
 {
     var res = true;
@@ -237,7 +225,7 @@ function validate()
     if (validateVietnameseName() != true)
     {
         res = false;
-        alert("Name only contains word characters"); 
+        alert("Name only contains word characters, first letter of each word must be capitalized"); 
         return res;
     }
     if (regexPhoneNum.test(phone) != true)
