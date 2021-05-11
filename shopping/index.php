@@ -59,7 +59,7 @@
             $element=['sl'];
             $query="select soluongton from sanpham where masp='".$this->request['msp']."'";
             $result=$this->conn->readData($query,$element);
-            if($result['data'][0]['sl']>$this->request['sl']){
+            if($result['data'][0]['sl']>=$this->request['sl']){
                 $query="select soluongton from sanpham where masp='".$this->request['msp']."'";
                 $sl=$this->conn->readData($query,['sl']);
                 $sl=$sl['data'][0]['sl'];
